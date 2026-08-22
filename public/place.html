@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="copyright" content="VNPT Gia Lai" />
+  <meta name="theme-color" content="#0068B5" />
+  <title>Chi tiết địa điểm | Bản đồ số du lịch Phường Bình Định</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.7/build/pannellum.css" />
+  <link rel="stylesheet" href="/assets/css/base.css" />
+  <link rel="stylesheet" href="/assets/css/place-detail.css?v=vnpt-16" />
+</head>
+<body class="detail-body">
+  <header class="site-header">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 37c8-2 12-8 16-16 3 8 8 14 16 16" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M13 23c4-6 8-10 11-12 4 3 8 7 11 12" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><circle cx="24" cy="11" r="3.2" fill="currentColor"/></svg></span><span class="brand-copy"><strong>BÌNH ĐỊNH</strong><small>BẢN ĐỒ DU LỊCH SỐ</small></span></a>
+    <nav class="main-nav" aria-label="Điều hướng chính"><a href="/trang-chu.html">Trang chủ</a><a href="/#mapSection">Bản đồ du lịch</a><a href="/kham-pha-dia-diem.html">Khám phá địa điểm</a></nav>
+    <div class="header-actions"><a class="admin-link" href="/">← Bản đồ</a><a class="admin-link" href="/admin">Quản trị</a><button class="menu-button" id="menuButton" type="button" aria-label="Mở menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+  </header>
+
+  <main class="detail-main">
+    <div id="detailLoading" class="detail-loading">Đang tải thông tin địa điểm...</div>
+    <div id="detailError" class="detail-error" hidden></div>
+    <article id="detailContent" hidden>
+      <section class="detail-hero">
+        <div id="heroImageWrap" class="hero-image-wrap"><img id="heroImage" alt="" /></div>
+        <div class="hero-copy"><span id="detailCategory" class="detail-category"></span><h1 id="detailName"></h1><p id="detailAddress"></p><div id="detailMeta" class="detail-meta"></div><div id="detailActions" class="detail-actions"></div></div>
+      </section>
+
+      <section id="gallerySection" class="detail-section" hidden><div class="section-heading"><span class="eyebrow">Hình ảnh</span><h2>Thư viện địa điểm</h2></div><div id="detailGallery" class="detail-gallery"></div></section>
+
+      <section class="detail-grid">
+        <div class="detail-section article-section"><div class="section-heading"><span class="eyebrow">Giới thiệu</span><h2 id="articleTitle">Thông tin địa điểm</h2></div><p id="articleSummary" class="article-summary"></p><div id="articleContent" class="article-content"></div><a id="externalArticleLink" class="external-article-link" href="#" target="_blank" rel="noopener" hidden>Đọc bài viết liên kết ↗</a><div id="noArticle" class="no-article" hidden>Nội dung giới thiệu đang được cập nhật.</div></div>
+
+        <aside class="detail-section info-section"><div class="section-heading"><span class="eyebrow">Thông tin</span><h2>Liên hệ & vị trí</h2></div><dl class="info-list"><div><dt>Địa chỉ</dt><dd id="infoAddress"></dd></div><div id="phoneInfo"><dt>Điện thoại</dt><dd id="infoPhone"></dd></div><div id="websiteInfo"><dt>Website</dt><dd id="infoWebsite"></dd></div><div id="hoursInfo"><dt>Giờ hoạt động</dt><dd id="infoHours"></dd></div><div id="priceInfo"><dt>Mức giá</dt><dd id="infoPrice"></dd></div><div><dt>Tọa độ</dt><dd id="infoCoords"></dd></div></dl></aside>
+      </section>
+
+      <section id="locationExplorer" class="detail-section location-explorer">
+        <div class="section-heading location-heading"><div><span class="eyebrow">Khám phá vị trí</span><h2>Dẫn đường & Tour 360°</h2><p>Xem tuyến đường và không gian 360° của địa điểm.</p></div><div class="location-actions"><a id="routeToButton" class="detail-button primary" href="/">Dẫn đường</a><button id="show360Button" class="detail-button" type="button">Tour 360°</button><button id="close360Button" class="detail-button close-360-button" type="button" hidden>Đóng 360°</button></div></div>
+        <div id="locationStatus" class="location-status"></div>
+        <div id="detailPanorama" class="location-viewer" hidden></div>
+      </section>
+    </article>
+  </main>
+
+  <dialog id="imageLightbox" class="image-lightbox"><button id="closeLightbox" type="button" aria-label="Đóng">×</button><img id="lightboxImage" alt="" /><p id="lightboxCaption"></p></dialog>
+
+  <footer class="site-footer"><div><strong>Bản đồ số du lịch Phường Bình Định</strong></div><div class="footer-note">© 2026 VNPT Gia Lai. Bản quyền thuộc VNPT Gia Lai.</div></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.7/build/pannellum.js"></script>
+  <script type="module" src="/assets/js/place-detail.js?v=vnpt-16"></script>
+  <script>
+    (function(){
+      var btn = document.getElementById("menuButton");
+      var hdr = document.querySelector(".site-header");
+      if(!btn||!hdr) return;
+      btn.addEventListener("click",function(){
+        var open = hdr.classList.toggle("menu-open");
+        btn.setAttribute("aria-expanded", String(open));
+      });
+      document.addEventListener("click",function(e){
+        if(!hdr.contains(e.target)){
+          hdr.classList.remove("menu-open");
+          btn.setAttribute("aria-expanded","false");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

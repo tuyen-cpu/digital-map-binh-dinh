@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="copyright" content="VNPT Gia Lai" />
+  <meta name="theme-color" content="#0068B5" />
+  <title>Khám phá địa điểm | Bản đồ số du lịch Phường Bình Định</title>
+  <meta name="description" content="Danh sách đầy đủ các địa điểm du lịch, ẩm thực, lưu trú, giải trí, sức khỏe và tiện ích tại Phường Bình Định." />
+  <link rel="stylesheet" href="/assets/css/base.css" />
+  <link rel="stylesheet" href="/assets/css/explore.css?v=vnpt-16" />
+</head>
+<body class="explore-body">
+
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Bản đồ số du lịch Phường Bình Định">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48"><path d="M8 37c8-2 12-8 16-16 3 8 8 14 16 16" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M13 23c4-6 8-10 11-12 4 3 8 7 11 12" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><circle cx="24" cy="11" r="3.2" fill="currentColor"/></svg>
+      </span>
+      <span class="brand-copy"><strong>BÌNH ĐỊNH</strong><small>BẢN ĐỒ DU LỊCH SỐ</small></span>
+    </a>
+
+    <nav class="main-nav" aria-label="Điều hướng chính">
+      <a href="/trang-chu.html">Trang chủ</a>
+      <a href="/#mapSection">Bản đồ du lịch</a>
+      <a class="active" href="/kham-pha-dia-diem.html">Khám phá địa điểm</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="admin-link" href="/admin">Quản trị</a>
+      <button class="menu-button" id="menuButton" type="button" aria-label="Mở menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="explore-main">
+
+    <div class="explore-hero">
+      <h1>Khám phá địa điểm</h1>
+      <p>Toàn bộ địa điểm du lịch, ẩm thực, lưu trú và tiện ích trong Phường Bình Định.</p>
+    </div>
+
+    <!-- Toolbar: search + category filter -->
+    <div class="explore-toolbar">
+      <div class="explore-search-wrap">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M13 13l3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <input
+          id="exploreSearchInput"
+          type="search"
+          placeholder="Tìm địa điểm theo tên, địa chỉ..."
+          autocomplete="off"
+          aria-label="Tìm kiếm địa điểm"
+        />
+        <button id="exploreSearchClear" class="explore-search-clear" type="button" aria-label="Xóa tìm kiếm">×</button>
+      </div>
+
+      <div class="explore-category-tabs" id="exploreTabs" role="group" aria-label="Lọc theo danh mục">
+        <!-- Được render bởi explore.js -->
+      </div>
+    </div>
+
+    <!-- Status bar -->
+    <div class="explore-status">
+      <p class="explore-count" id="exploreCount" aria-live="polite"></p>
+      <div class="explore-loading" id="exploreLoading" style="display:none" aria-live="polite">
+        <span class="explore-spinner"></span>
+        <span>Đang tải...</span>
+      </div>
+    </div>
+
+    <!-- Grid địa điểm -->
+    <div class="explore-grid" id="exploreGrid" aria-label="Danh sách địa điểm">
+      <!-- Được render bởi explore.js -->
+    </div>
+
+    <!-- Phân trang -->
+    <nav class="explore-pagination" id="explorePagination" aria-label="Phân trang danh sách địa điểm">
+      <!-- Được render bởi explore.js -->
+    </nav>
+
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>Bản đồ số du lịch Phường Bình Định</strong>
+      <p>Khám phá điểm đến, dịch vụ và tiện ích trên địa bàn Phường Bình Định.</p>
+    </div>
+    <div class="footer-note">© 2026 VNPT Gia Lai. Bản quyền thuộc VNPT Gia Lai.</div>
+  </footer>
+
+  <script type="module" src="/assets/js/explore.js?v=vnpt-16"></script>
+</body>
+</html>

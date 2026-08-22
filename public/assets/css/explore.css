@@ -1,0 +1,401 @@
+/* =============================================
+   Trang Khám phá địa điểm — explore.css
+   ============================================= */
+
+.explore-body {
+  background: #F3F9FD;
+  color: #123B57;
+}
+
+.explore-main {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 36px 0 80px;
+}
+
+/* ---------- Hero / heading ---------- */
+.explore-hero {
+  margin-bottom: 30px;
+}
+.explore-hero h1 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #123B57;
+  margin: 0 0 6px;
+  line-height: 1.15;
+}
+.explore-hero p {
+  color: #6A8192;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* ---------- Toolbar (search + category) ---------- */
+.explore-toolbar {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 26px;
+  flex-wrap: wrap;
+  overflow: visible;
+}
+
+.explore-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  background: #fff;
+  border: 1px solid #D8EAF6;
+  border-radius: 12px;
+  padding: 0 14px;
+  height: 44px;
+  min-height: 44px;
+  box-sizing: border-box;
+}
+.explore-search-wrap svg {
+  flex-shrink: 0;
+  color: #8FAEC0;
+}
+.explore-search-wrap input {
+  border: 0;
+  outline: none;
+  flex: 1;
+  font-size: 14px;
+  color: #123B57;
+  background: transparent;
+  min-width: 0;
+}
+.explore-search-wrap input::placeholder {
+  color: #A8BFC9;
+}
+/* Ẩn nút clear native của browser (input[type=search]) */
+.explore-search-wrap input::-webkit-search-cancel-button,
+.explore-search-wrap input::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.explore-search-clear {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: #A8BFC9;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0 2px;
+  display: none;
+}
+.explore-search-clear.visible {
+  display: block;
+}
+
+.explore-category-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.explore-tab {
+  border: 1px solid #D8EAF6;
+  background: #fff;
+  color: #526F82;
+  border-radius: 999px;
+  padding: 9px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.explore-tab:hover {
+  background: #EEF8FE;
+  border-color: #AACDE0;
+}
+.explore-tab.active {
+  background: #0068B5;
+  color: #fff;
+  border-color: #0068B5;
+}
+
+/* ---------- Status bar ---------- */
+.explore-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.explore-count {
+  font-size: 13px;
+  color: #6A8192;
+}
+.explore-count strong {
+  color: #0068B5;
+  font-weight: 800;
+}
+.explore-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #8FAEC0;
+}
+.explore-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #D8EAF6;
+  border-top-color: #0068B5;
+  border-radius: 50%;
+  animation: explore-spin .7s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes explore-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Grid ---------- */
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+/* ---------- Place card ---------- */
+.explore-card {
+  background: #fff;
+  border: 1px solid #D9E9F3;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow .18s, transform .18s;
+  text-decoration: none;
+  color: inherit;
+}
+.explore-card:hover {
+  box-shadow: 0 8px 28px rgba(22, 75, 108, .12);
+  transform: translateY(-2px);
+}
+
+.explore-card-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #E5F0F7;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.explore-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.explore-card-thumb-placeholder {
+  font-size: 32px;
+  color: #A8C8DA;
+}
+
+.explore-card-body {
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.explore-card-cat {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #EAF6FD;
+  color: #0068B5;
+  font-size: 10px;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 8px;
+  width: fit-content;
+}
+.explore-card-name {
+  font-size: 16px;
+  font-weight: 750;
+  color: #173D57;
+  margin: 0 0 4px;
+  line-height: 1.3;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.explore-card-address {
+  font-size: 12px;
+  color: #7A92A3;
+  margin: 0 0 8px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.explore-card-note {
+  font-size: 12px;
+  color: #536F82;
+  line-height: 1.55;
+  flex: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  margin: 0 0 10px;
+}
+.explore-card-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+.explore-card-pill {
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #F1F7FB;
+  color: #627B8C;
+  font-size: 10px;
+}
+
+/* ---------- Empty state ---------- */
+.explore-empty {
+  grid-column: 1 / -1;
+  padding: 60px 24px;
+  text-align: center;
+  background: #fff;
+  border: 1px dashed #C9DCE8;
+  border-radius: 18px;
+  color: #7A92A3;
+}
+.explore-empty p {
+  margin: 8px 0 0;
+  font-size: 13px;
+}
+
+/* ---------- Pagination ---------- */
+.explore-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+.explore-page-btn {
+  min-width: 40px;
+  height: 40px;
+  border: 1px solid #D8EAF6;
+  background: #fff;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #526F82;
+  cursor: pointer;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .14s, color .14s, border-color .14s;
+}
+.explore-page-btn:hover:not(:disabled) {
+  background: #EEF8FE;
+  border-color: #AACDE0;
+}
+.explore-page-btn.active {
+  background: #0068B5;
+  color: #fff;
+  border-color: #0068B5;
+}
+.explore-page-btn:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+.explore-page-ellipsis {
+  color: #A8BFC9;
+  font-size: 14px;
+  padding: 0 4px;
+  user-select: none;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .explore-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+  }
+}
+@media (max-width: 640px) {
+  .explore-main {
+    width: calc(100% - 18px);
+    padding: 18px 0 60px;
+  }
+  .explore-hero h1 {
+    font-size: 24px;
+  }
+  /* Toolbar thành 2 row riêng: search trên, tabs dưới */
+  .explore-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  /* Search full-width */
+  .explore-search-wrap {
+    width: 100%;
+    min-width: 0 !important;
+    height: 44px !important;
+    border-radius: 12px;
+    padding: 0 12px;
+    box-sizing: border-box;
+  }
+  .explore-search-wrap input {
+    font-size: 14px;
+    height: 100%;
+  }
+  /* Tabs: scroll ngang, thoát overflow */
+  .explore-category-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    gap: 6px;
+    padding-bottom: 4px;
+    margin-bottom: -4px; /* bù lại padding để không bị clip */
+    scrollbar-width: none;
+    width: 100%;
+  }
+  .explore-category-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .explore-tab {
+    flex-shrink: 0;
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+  .explore-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .explore-card-body {
+    padding: 12px 13px 14px;
+  }
+  .explore-card-name {
+    font-size: 14px;
+  }
+}
+@media (max-width: 400px) {
+  .explore-grid {
+    grid-template-columns: 1fr;
+  }
+}

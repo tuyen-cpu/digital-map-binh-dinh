@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="copyright" content="VNPT Gia Lai" />
+  <title>Quản trị nội dung | Bản đồ số du lịch Phường Bình Định</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="/assets/css/base.css" />
+  <link rel="stylesheet" href="/assets/css/admin.css" />
+</head>
+<body class="admin-body">
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <a class="brand admin-brand" href="/"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 37c8-2 12-8 16-16 3 8 8 14 16 16" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M13 23c4-6 8-10 11-12 4 3 8 7 11 12" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><circle cx="24" cy="11" r="3.2" fill="currentColor"/></svg></span><span class="brand-copy"><strong>BÌNH ĐỊNH</strong><small>HỆ THỐNG QUẢN TRỊ</small></span></a>
+      <nav class="admin-nav"><a class="active" href="#places">Địa điểm</a><a href="/" target="_blank">Xem bản đồ ↗</a></nav>
+      <div class="sidebar-user"><span class="avatar">A</span><div><strong id="adminUsername">admin</strong><small>Quản trị viên</small></div><button id="logoutButton" type="button">Đăng xuất</button></div><div class="admin-copyright">© 2026 VNPT Gia Lai</div>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar"><div><span class="eyebrow">Bản đồ số du lịch</span><h1>Quản lý địa điểm</h1></div><button id="newPlaceButton" class="primary-button compact" type="button">+ Thêm địa điểm</button></header>
+
+      <section class="stats-grid">
+        <article><span>Tổng địa điểm quản trị</span><strong id="statTotal">0</strong></article><article><span>Ẩm thực</span><strong id="statFood">0</strong></article><article><span>Có tọa độ</span><strong id="statMapped">0</strong></article><article><span>Có bài viết</span><strong id="statArticle">0</strong></article>
+      </section>
+
+      <section id="places" class="admin-card">
+        <div class="card-toolbar"><div><h2>Danh sách địa điểm</h2></div><div class="toolbar-controls"><input id="adminSearch" type="search" placeholder="Tìm địa điểm..."/><select id="categoryFilter"><option value="">Tất cả danh mục</option><option value="dulich">Khu/điểm du lịch</option><option value="luutru">Lưu trú</option><option value="amthuc">Ẩm thực</option><option value="giaitri">Giải trí</option><option value="suckhoe">Sức khỏe</option><option value="tienich">Tiện ích</option></select></div></div>
+        <div class="table-wrap"><table class="admin-table"><thead><tr><th>Tên</th><th>Danh mục</th><th>Địa chỉ</th><th>Tọa độ</th><th>Nội dung</th><th>Trạng thái</th><th></th></tr></thead><tbody id="placeTableBody"></tbody></table></div>
+        <div id="tableEmpty" class="table-empty" hidden>Không có dữ liệu phù hợp.</div>
+      </section>
+
+      <section id="sync" class="admin-card sync-card" hidden>
+        <div><span class="eyebrow">Hệ thống</span><h2>Khôi phục dữ liệu ban đầu</h2><p>Khôi phục dữ liệu về trạng thái ban đầu.</p></div>
+        <div class="sync-controls"><select id="syncCategory" hidden><option value="amthuc">Ẩm thực</option></select><button id="syncButton" class="secondary-button" type="button">Khôi phục dữ liệu</button></div>
+        <div id="syncMessage" class="form-message"></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="placeDialog" class="place-dialog place-dialog-wide">
+    <form id="placeForm" class="dialog-card">
+      <div class="dialog-header"><div><span class="eyebrow">Dữ liệu bản đồ</span><h2 id="dialogTitle">Thêm địa điểm</h2></div><button id="closeDialogButton" class="icon-button" type="button" aria-label="Đóng">×</button></div>
+      <input id="placeId" type="hidden" />
+      <div class="form-grid">
+        <label class="span-2"><span>Tên địa điểm *</span><input id="placeName" required /></label>
+        <label><span>Danh mục *</span><select id="placeCategory" required><option value="dulich">Khu/điểm du lịch</option><option value="luutru">Lưu trú</option><option value="amthuc">Ẩm thực</option><option value="giaitri">Giải trí</option><option value="suckhoe">Sức khỏe</option><option value="tienich">Tiện ích</option></select></label>
+        <label><span>Trạng thái</span><select id="placeStatus"><option value="published">Hiển thị</option><option value="draft">Ẩn</option></select></label>
+        <label class="span-2"><span>Địa chỉ</span><input id="placeAddress" /></label>
+        <label><span>Vĩ độ</span><input id="placeLat" type="number" step="any" inputmode="decimal" placeholder="VD: 13.88629" /></label><label><span>Kinh độ</span><input id="placeLng" type="number" step="any" inputmode="decimal" placeholder="VD: 109.11177" /></label>
+        <div class="coordinate-helper span-2"><span>Chọn vị trí trên bản đồ hoặc nhập tọa độ.</span><button id="clearCoordinatesButton" class="text-button" type="button">Xóa tọa độ</button></div>
+        <div class="coordinate-map-wrap span-2"><div id="placeMap" class="place-map" aria-label="Chọn tọa độ địa điểm trên bản đồ"></div><div id="placeMapHint" class="place-map-hint">Bấm lên bản đồ để chọn đúng vị trí.</div></div>
+        <label class="span-2"><span>Ghi chú / loại hình</span><input id="placeNote" /></label>
+        <label><span>Số điện thoại</span><input id="placePhone" /></label><label><span>Website</span><input id="placeWebsite" type="url" placeholder="https://..." /></label>
+      </div>
+
+      <section id="placeContentEditor" class="place-content-editor" hidden>
+        <div class="editor-section-head"><div><span class="eyebrow">Thư viện ảnh</span><h3>Hình ảnh địa điểm</h3><p>Quản lý hình ảnh hiển thị của địa điểm.</p></div><span id="imageLimitText" class="editor-note"></span></div>
+        <div class="upload-row"><input id="placeImageFiles" type="file" accept="image/jpeg,image/png,image/webp" multiple /><button id="uploadImagesButton" class="secondary-button" type="button">Tải ảnh lên</button></div>
+        <div id="imageUploadMessage" class="form-message"></div>
+        <div id="imageAdminGrid" class="image-admin-grid"></div>
+
+        <div class="panorama-editor">
+          <div class="editor-section-head"><div><span class="eyebrow">Không gian 360°</span><h3>Ảnh 360°</h3><p>Quản lý hình ảnh 360° của địa điểm.</p></div><span id="panoramaLimitText" class="editor-note"></span></div>
+          <div class="upload-row"><input id="placePanoramaFiles" type="file" accept="image/jpeg,image/png,image/webp" multiple /><button id="uploadPanoramasButton" class="secondary-button" type="button">Tải ảnh 360 lên</button></div>
+          <div id="panoramaUploadMessage" class="form-message"></div>
+          <div id="panoramaAdminGrid" class="panorama-admin-grid"></div>
+        </div>
+
+        <div class="article-editor">
+          <div class="editor-section-head"><div><span class="eyebrow">Trang chi tiết</span><h3>Bài giới thiệu địa điểm</h3><p>Quản lý nội dung giới thiệu hiển thị trên trang chi tiết.</p></div><a id="detailPreviewLink" class="text-link" href="#" target="_blank" rel="noopener">Mở trang chi tiết ↗</a></div>
+          <div class="form-grid article-form-grid">
+            <label><span>Tiêu đề bài viết</span><input id="articleTitle" placeholder="Tên bài giới thiệu" /></label>
+            <label><span>Trạng thái</span><select id="articleStatus"><option value="published">Hiển thị</option><option value="draft">Ẩn</option></select></label>
+            <label class="span-2"><span>Mô tả ngắn</span><textarea id="articleSummary" rows="3" placeholder="Đoạn giới thiệu ngắn..."></textarea></label>
+            <label class="span-2"><span>Nội dung bài viết</span><textarea id="articleContent" rows="10" placeholder="Nhập nội dung giới thiệu chi tiết. Có thể xuống dòng để chia đoạn."></textarea></label>
+            <label class="span-2"><span>Đường dẫn bài viết ngoài (không bắt buộc)</span><input id="articleExternalUrl" type="url" placeholder="https://..." /></label>
+          </div>
+          <div id="articleMessage" class="form-message"></div>
+          <div class="article-actions"><button id="deleteArticleButton" class="danger-button" type="button" hidden>Xóa bài viết</button><button id="saveArticleButton" class="secondary-button" type="button">Lưu bài viết</button></div>
+        </div>
+      </section>
+
+      <div id="placeFormMessage" class="form-message"></div>
+      <div class="dialog-actions"><button id="deletePlaceButton" class="danger-button" type="button" hidden>Xóa địa điểm</button><span></span><button id="cancelDialogButton" class="ghost-button" type="button">Đóng</button><button class="primary-button compact" type="submit">Lưu địa điểm</button></div>
+    </form>
+  </dialog>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script type="module" src="/assets/js/admin/dashboard.js?v=vnpt-1"></script>
+</body>
+</html>
