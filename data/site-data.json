@@ -1063,7 +1063,7 @@
     {
       "id": "img-chua-thien-an-real-01",
       "placeId": "chua-thien-an",
-      "url": "/assets/images/places-real/chua-thien-an-1.webp",
+      "url": "assets/images/places-real/chua-thien-an-1.webp",
       "mimeType": "image/webp",
       "originalName": "chua-thien-an-1.webp",
       "caption": "Ảnh thực tế Chùa Thiên An",
@@ -1078,7 +1078,7 @@
     {
       "id": "img-chua-thien-an-real-02",
       "placeId": "chua-thien-an",
-      "url": "/assets/images/places-real/chua-thien-an-2.webp",
+      "url": "assets/images/places-real/chua-thien-an-2.webp",
       "mimeType": "image/webp",
       "originalName": "chua-thien-an-2.webp",
       "caption": "Không gian thực tế Chùa Thiên An",
@@ -1093,7 +1093,7 @@
     {
       "id": "img-ga-binh-dinh-real-01",
       "placeId": "ga-binh-dinh",
-      "url": "/assets/images/places-real/ga-binh-dinh-1.webp",
+      "url": "assets/images/places-real/ga-binh-dinh-1.webp",
       "mimeType": "image/webp",
       "originalName": "ga-binh-dinh-1.webp",
       "caption": "Ga Bình Định",
@@ -1110,7 +1110,7 @@
     {
       "id": "img-khach-san-century-real-01",
       "placeId": "khach-san-century",
-      "url": "/assets/images/places-real/khach-san-century-1.webp",
+      "url": "assets/images/places-real/khach-san-century-1.webp",
       "mimeType": "image/webp",
       "originalName": "khach-san-century-1.webp",
       "caption": "Không gian thực tế Khách sạn Century",
@@ -1125,7 +1125,7 @@
     {
       "id": "img-nha-van-hoa-an-nhon-real-01",
       "placeId": "nha-van-hoa-an-nhon",
-      "url": "/assets/images/places-real/nha-van-hoa-an-nhon-1.webp",
+      "url": "assets/images/places-real/nha-van-hoa-an-nhon-1.webp",
       "mimeType": "image/webp",
       "originalName": "nha-van-hoa-an-nhon-1.webp",
       "caption": "Nhà văn hóa Trung tâm An Nhơn",
@@ -1140,7 +1140,7 @@
     {
       "id": "img-thcs-binh-dinh-real-01",
       "placeId": "thcs-binh-dinh",
-      "url": "/assets/images/places-real/thcs-binh-dinh-1.webp",
+      "url": "assets/images/places-real/thcs-binh-dinh-1.webp",
       "mimeType": "image/webp",
       "originalName": "thcs-binh-dinh-1.webp",
       "caption": "Ảnh khuôn viên trường học thực tế tham khảo · Trường THCS Phường Bình Định",
@@ -1155,7 +1155,7 @@
     {
       "id": "img-th-so-1-binh-dinh-real-01",
       "placeId": "th-so-1-binh-dinh",
-      "url": "/assets/images/places-real/th-so-1-binh-dinh-1.webp",
+      "url": "assets/images/places-real/th-so-1-binh-dinh-1.webp",
       "mimeType": "image/webp",
       "originalName": "th-so-1-binh-dinh-1.webp",
       "caption": "Ảnh khuôn viên trường học thực tế tham khảo · Trường Tiểu học số 1 Phường Bình Định",
@@ -1170,7 +1170,7 @@
     {
       "id": "img-dir-dong-van-coffee-real-01",
       "placeId": "dir-dong-van-coffee",
-      "url": "/assets/images/places-real/dir-dong-van-coffee-1.webp",
+      "url": "assets/images/places-real/dir-dong-van-coffee-1.webp",
       "mimeType": "image/webp",
       "originalName": "dir-dong-van-coffee-1.webp",
       "caption": "Ảnh không gian cà phê thực tế tham khảo · Cà phê Đồng Văn",
@@ -1185,7 +1185,7 @@
     {
       "id": "img-dir-kai-garden-real-01",
       "placeId": "dir-kai-garden",
-      "url": "/assets/images/places-real/dir-kai-garden-1.webp",
+      "url": "assets/images/places-real/dir-kai-garden-1.webp",
       "mimeType": "image/webp",
       "originalName": "dir-kai-garden-1.webp",
       "caption": "Ảnh không gian cà phê thực tế tham khảo · KAI GARDEN COFFEE",
@@ -1200,7 +1200,7 @@
     {
       "id": "img-dir-ozone-coffee-real-01",
       "placeId": "dir-ozone-coffee",
-      "url": "/assets/images/places-real/dir-ozone-coffee-1.webp",
+      "url": "assets/images/places-real/dir-ozone-coffee-1.webp",
       "mimeType": "image/webp",
       "originalName": "dir-ozone-coffee-1.webp",
       "caption": "Hình ảnh thực tế Ozone Coffee",
@@ -1215,7 +1215,7 @@
     {
       "id": "img-dir-ozone-coffee-real-02",
       "placeId": "dir-ozone-coffee",
-      "url": "/assets/images/places-real/dir-ozone-coffee-2.webp",
+      "url": "assets/images/places-real/dir-ozone-coffee-2.webp",
       "mimeType": "image/webp",
       "originalName": "dir-ozone-coffee-2.webp",
       "caption": "Không gian thực tế Ozone Coffee",
@@ -1230,7 +1230,7 @@
     {
       "id": "img-cho-binh-dinh-real-01",
       "placeId": "cho-binh-dinh",
-      "url": "/assets/images/places-real/cho-binh-dinh-1.webp",
+      "url": "assets/images/places-real/cho-binh-dinh-1.webp",
       "mimeType": "image/webp",
       "originalName": "cho-binh-dinh-1.webp",
       "caption": "Hình ảnh thực tế khu vực chợ An Nhơn/Bình Định",
@@ -1245,7 +1245,7 @@
     {
       "id": "img-coopmart-an-nhon-real-01",
       "placeId": "coopmart-an-nhon",
-      "url": "/assets/images/places-real/coopmart-an-nhon-1.webp",
+      "url": "assets/images/places-real/coopmart-an-nhon-1.webp",
       "mimeType": "image/webp",
       "originalName": "coopmart-an-nhon-1.webp",
       "caption": "Hình ảnh thực tế Co.opmart An Nhơn",
@@ -1260,7 +1260,7 @@
     {
       "id": "img-cong-vien-trung-tam-real-01",
       "placeId": "cong-vien-trung-tam",
-      "url": "/assets/images/places-real/cong-vien-trung-tam-1.webp",
+      "url": "assets/images/places-real/cong-vien-trung-tam-1.webp",
       "mimeType": "image/webp",
       "originalName": "cong-vien-trung-tam-1.webp",
       "caption": "Nhà văn hóa Trung tâm An Nhơn · Công viên Trung tâm",
@@ -1275,7 +1275,7 @@
     {
       "id": "img-cong-vien-nuoc-an-nhon-real-01",
       "placeId": "cong-vien-nuoc-an-nhon",
-      "url": "/assets/images/places-real/cong-vien-nuoc-an-nhon-1.webp",
+      "url": "assets/images/places-real/cong-vien-nuoc-an-nhon-1.webp",
       "mimeType": "image/webp",
       "originalName": "cong-vien-nuoc-an-nhon-1.webp",
       "caption": "Nhà văn hóa Trung tâm An Nhơn · Công viên nước An Nhơn",
@@ -1290,7 +1290,7 @@
     {
       "id": "img-rex-an-nhon-real-01",
       "placeId": "rex-an-nhon",
-      "url": "/assets/images/places-real/rex-an-nhon-1.webp",
+      "url": "assets/images/places-real/rex-an-nhon-1.webp",
       "mimeType": "image/webp",
       "originalName": "rex-an-nhon-1.webp",
       "caption": "Hình ảnh thực tế REX Hotel An Nhơn",
@@ -1305,7 +1305,7 @@
     {
       "id": "img-vuong-minh-hotel-real-01",
       "placeId": "vuong-minh-hotel",
-      "url": "/assets/images/places-real/vuong-minh-hotel-1.webp",
+      "url": "assets/images/places-real/vuong-minh-hotel-1.webp",
       "mimeType": "image/webp",
       "originalName": "vuong-minh-hotel-1.webp",
       "caption": "Ảnh không gian lưu trú thực tế tham khảo · Vuong Minh Hotel",
@@ -1320,7 +1320,7 @@
     {
       "id": "img-gia-lam-2-hotel-real-01",
       "placeId": "gia-lam-2-hotel",
-      "url": "/assets/images/places-real/gia-lam-2-hotel-1.webp",
+      "url": "assets/images/places-real/gia-lam-2-hotel-1.webp",
       "mimeType": "image/webp",
       "originalName": "gia-lam-2-hotel-1.webp",
       "caption": "Ảnh không gian lưu trú thực tế tham khảo · Hotel - Nhà Nghỉ Gia Lâm 2",
@@ -1335,7 +1335,7 @@
     {
       "id": "img-motel-ngoc-hieu-real-01",
       "placeId": "motel-ngoc-hieu",
-      "url": "/assets/images/places-real/motel-ngoc-hieu-1.webp",
+      "url": "assets/images/places-real/motel-ngoc-hieu-1.webp",
       "mimeType": "image/webp",
       "originalName": "motel-ngoc-hieu-1.webp",
       "caption": "Ảnh không gian lưu trú thực tế tham khảo · Motel Ngọc Hiếu",
@@ -1350,7 +1350,7 @@
     {
       "id": "img-sams-coffee-real-01",
       "placeId": "sams-coffee",
-      "url": "/assets/images/places-real/sams-coffee-1.webp",
+      "url": "assets/images/places-real/sams-coffee-1.webp",
       "mimeType": "image/webp",
       "originalName": "sams-coffee-1.webp",
       "caption": "Ảnh không gian cà phê thực tế tham khảo · Sam’s Coffee",
@@ -1365,7 +1365,7 @@
     {
       "id": "img-khong-ten-cafe-real-01",
       "placeId": "khong-ten-cafe",
-      "url": "/assets/images/places-real/khong-ten-cafe-1.webp",
+      "url": "assets/images/places-real/khong-ten-cafe-1.webp",
       "mimeType": "image/webp",
       "originalName": "khong-ten-cafe-1.webp",
       "caption": "Ảnh không gian cà phê thực tế tham khảo · Cà Phê Không Tên",
@@ -1380,7 +1380,7 @@
     {
       "id": "img-milano-30-thang-3-real-01",
       "placeId": "milano-30-thang-3",
-      "url": "/assets/images/places-real/milano-30-thang-3-1.webp",
+      "url": "assets/images/places-real/milano-30-thang-3-1.webp",
       "mimeType": "image/webp",
       "originalName": "milano-30-thang-3-1.webp",
       "caption": "Ảnh không gian cà phê thực tế tham khảo · MILANO COFFEE - 30 Tháng 3",
@@ -1395,7 +1395,7 @@
     {
       "id": "img-milano-nguyen-dinh-chieu-real-01",
       "placeId": "milano-nguyen-dinh-chieu",
-      "url": "/assets/images/places-real/milano-nguyen-dinh-chieu-1.webp",
+      "url": "assets/images/places-real/milano-nguyen-dinh-chieu-1.webp",
       "mimeType": "image/webp",
       "originalName": "milano-nguyen-dinh-chieu-1.webp",
       "caption": "Ảnh không gian cà phê thực tế tham khảo · Milano Coffee - Nguyễn Đình Chiểu",
@@ -1410,7 +1410,7 @@
     {
       "id": "img-nau-coffee-real-01",
       "placeId": "nau-coffee",
-      "url": "/assets/images/places-real/nau-coffee-1.webp",
+      "url": "assets/images/places-real/nau-coffee-1.webp",
       "mimeType": "image/webp",
       "originalName": "nau-coffee-1.webp",
       "caption": "Ảnh không gian cà phê thực tế tham khảo · Nẫu Coffee",
@@ -1425,7 +1425,7 @@
     {
       "id": "img-thi-nhan-coffee-real-01",
       "placeId": "thi-nhan-coffee",
-      "url": "/assets/images/places-real/thi-nhan-coffee-1.webp",
+      "url": "assets/images/places-real/thi-nhan-coffee-1.webp",
       "mimeType": "image/webp",
       "originalName": "thi-nhan-coffee-1.webp",
       "caption": "Hình ảnh thực tế THI NHÂN Coffee",
@@ -1440,7 +1440,7 @@
     {
       "id": "img-thi-nhan-coffee-real-02",
       "placeId": "thi-nhan-coffee",
-      "url": "/assets/images/places-real/thi-nhan-coffee-2.webp",
+      "url": "assets/images/places-real/thi-nhan-coffee-2.webp",
       "mimeType": "image/webp",
       "originalName": "thi-nhan-coffee-2.webp",
       "caption": "Không gian thực tế THI NHÂN Coffee",
@@ -1455,7 +1455,7 @@
     {
       "id": "img-bidv-an-nhon-real-01",
       "placeId": "bidv-an-nhon",
-      "url": "/assets/images/places-real/bidv-an-nhon-1.webp",
+      "url": "assets/images/places-real/bidv-an-nhon-1.webp",
       "mimeType": "image/webp",
       "originalName": "bidv-an-nhon-1.webp",
       "caption": "Ảnh điểm giao dịch ngân hàng thực tế tham khảo · BIDV - PGD An Nhơn",
@@ -1470,7 +1470,7 @@
     {
       "id": "img-vietcombank-an-nhon-real-01",
       "placeId": "vietcombank-an-nhon",
-      "url": "/assets/images/places-real/vietcombank-an-nhon-1.webp",
+      "url": "assets/images/places-real/vietcombank-an-nhon-1.webp",
       "mimeType": "image/webp",
       "originalName": "vietcombank-an-nhon-1.webp",
       "caption": "Ảnh điểm giao dịch ngân hàng thực tế tham khảo · Vietcombank - PGD An Nhơn",
@@ -1485,7 +1485,7 @@
     {
       "id": "img-nama-bank-an-nhon-real-01",
       "placeId": "nama-bank-an-nhon",
-      "url": "/assets/images/places-real/nama-bank-an-nhon-1.webp",
+      "url": "assets/images/places-real/nama-bank-an-nhon-1.webp",
       "mimeType": "image/webp",
       "originalName": "nama-bank-an-nhon-1.webp",
       "caption": "Ảnh điểm giao dịch ngân hàng thực tế tham khảo · Nam A Bank - PGD An Nhơn",
@@ -1500,7 +1500,7 @@
     {
       "id": "img-mini-go-an-nhon-real-01",
       "placeId": "mini-go-an-nhon",
-      "url": "/assets/images/places-real/mini-go-an-nhon-1.webp",
+      "url": "assets/images/places-real/mini-go-an-nhon-1.webp",
       "mimeType": "image/webp",
       "originalName": "mini-go-an-nhon-1.webp",
       "caption": "Hình ảnh thực tế mini go! An Nhơn",
@@ -1515,7 +1515,7 @@
     {
       "id": "img-90s-cafe-real-01",
       "placeId": "90s-cafe",
-      "url": "/assets/images/places-real/90s-cafe-1.webp",
+      "url": "assets/images/places-real/90s-cafe-1.webp",
       "mimeType": "image/webp",
       "originalName": "90s-cafe-1.webp",
       "caption": "Hình ảnh thực tế 90’s CAFE",
@@ -1530,7 +1530,7 @@
     {
       "id": "img-90s-cafe-real-02",
       "placeId": "90s-cafe",
-      "url": "/assets/images/places-real/90s-cafe-2.webp",
+      "url": "assets/images/places-real/90s-cafe-2.webp",
       "mimeType": "image/webp",
       "originalName": "90s-cafe-2.webp",
       "caption": "Không gian thực tế 90’s CAFE",
@@ -1545,7 +1545,7 @@
     {
       "id": "img-hem-coffee-tea-real-01",
       "placeId": "hem-coffee-tea",
-      "url": "/assets/images/places-real/hem-coffee-tea-1.webp",
+      "url": "assets/images/places-real/hem-coffee-tea-1.webp",
       "mimeType": "image/webp",
       "originalName": "hem-coffee-tea-1.webp",
       "caption": "Hình ảnh thực tế H.E.M Coffee & Tea",
@@ -1560,7 +1560,7 @@
     {
       "id": "img-hem-coffee-tea-real-02",
       "placeId": "hem-coffee-tea",
-      "url": "/assets/images/places-real/hem-coffee-tea-2.webp",
+      "url": "assets/images/places-real/hem-coffee-tea-2.webp",
       "mimeType": "image/webp",
       "originalName": "hem-coffee-tea-2.webp",
       "caption": "Không gian thực tế H.E.M Coffee & Tea",
@@ -1575,7 +1575,7 @@
     {
       "id": "img-lab-tra-ca-phe-real-01",
       "placeId": "lab-tra-ca-phe",
-      "url": "/assets/images/places-real/lab-tra-ca-phe-1.webp",
+      "url": "assets/images/places-real/lab-tra-ca-phe-1.webp",
       "mimeType": "image/webp",
       "originalName": "lab-tra-ca-phe-1.webp",
       "caption": "Hình ảnh thực tế LAB Trà & Cà Phê",
@@ -1590,7 +1590,7 @@
     {
       "id": "img-lab-tra-ca-phe-real-02",
       "placeId": "lab-tra-ca-phe",
-      "url": "/assets/images/places-real/lab-tra-ca-phe-2.webp",
+      "url": "assets/images/places-real/lab-tra-ca-phe-2.webp",
       "mimeType": "image/webp",
       "originalName": "lab-tra-ca-phe-2.webp",
       "caption": "Không gian thực tế LAB Trà & Cà Phê",
@@ -1605,7 +1605,7 @@
     {
       "id": "img-coffee-bui-real-01",
       "placeId": "coffee-bui",
-      "url": "/assets/images/places-real/coffee-bui-1.webp",
+      "url": "assets/images/places-real/coffee-bui-1.webp",
       "mimeType": "image/webp",
       "originalName": "coffee-bui-1.webp",
       "caption": "Ảnh không gian cà phê thực tế tham khảo · Coffee Bụi",
@@ -1620,7 +1620,7 @@
     {
       "id": "img-tra-sua-phuc-tea-real-01",
       "placeId": "tra-sua-phuc-tea",
-      "url": "/assets/images/places-real/tra-sua-phuc-tea-1.webp",
+      "url": "assets/images/places-real/tra-sua-phuc-tea-1.webp",
       "mimeType": "image/webp",
       "originalName": "tra-sua-phuc-tea-1.webp",
       "caption": "Ảnh không gian cà phê thực tế tham khảo · Trà Sữa Phúc Tea An Nhơn",
@@ -1635,7 +1635,7 @@
     {
       "id": "img-baba-tea-real-01",
       "placeId": "baba-tea",
-      "url": "/assets/images/places-real/baba-tea-1.webp",
+      "url": "assets/images/places-real/baba-tea-1.webp",
       "mimeType": "image/webp",
       "originalName": "baba-tea-1.webp",
       "caption": "Ảnh không gian cà phê thực tế tham khảo · BABA TEA",
@@ -1650,7 +1650,7 @@
     {
       "id": "img-tra-sua-monta-real-01",
       "placeId": "tra-sua-monta",
-      "url": "/assets/images/places-real/tra-sua-monta-1.webp",
+      "url": "assets/images/places-real/tra-sua-monta-1.webp",
       "mimeType": "image/webp",
       "originalName": "tra-sua-monta-1.webp",
       "caption": "Ảnh không gian cà phê thực tế tham khảo · Trà sữa Monta",
@@ -1665,7 +1665,7 @@
     {
       "id": "img-tra-sua-habisu-real-01",
       "placeId": "tra-sua-habisu",
-      "url": "/assets/images/places-real/tra-sua-habisu-1.webp",
+      "url": "assets/images/places-real/tra-sua-habisu-1.webp",
       "mimeType": "image/webp",
       "originalName": "tra-sua-habisu-1.webp",
       "caption": "Ảnh không gian cà phê thực tế tham khảo · Trà sữa Habisu",
@@ -1680,7 +1680,7 @@
     {
       "id": "img-reno-milktea-real-01",
       "placeId": "reno-milktea",
-      "url": "/assets/images/places-real/reno-milktea-1.webp",
+      "url": "assets/images/places-real/reno-milktea-1.webp",
       "mimeType": "image/webp",
       "originalName": "reno-milktea-1.webp",
       "caption": "Ảnh không gian cà phê thực tế tham khảo · RENO Milktea",
@@ -1695,7 +1695,7 @@
     {
       "id": "img-ozone-drinks-food-real-01",
       "placeId": "ozone-drinks-food",
-      "url": "/assets/images/places-real/ozone-drinks-food-1.webp",
+      "url": "assets/images/places-real/ozone-drinks-food-1.webp",
       "mimeType": "image/webp",
       "originalName": "ozone-drinks-food-1.webp",
       "caption": "Hình ảnh thực tế Ozone Coffee",
@@ -1710,7 +1710,7 @@
     {
       "id": "img-ozone-drinks-food-real-02",
       "placeId": "ozone-drinks-food",
-      "url": "/assets/images/places-real/ozone-drinks-food-2.webp",
+      "url": "assets/images/places-real/ozone-drinks-food-2.webp",
       "mimeType": "image/webp",
       "originalName": "ozone-drinks-food-2.webp",
       "caption": "Không gian thực tế Ozone Coffee",
@@ -1725,7 +1725,7 @@
     {
       "id": "img-tra-sua-susu-real-01",
       "placeId": "tra-sua-susu",
-      "url": "/assets/images/places-real/tra-sua-susu-1.webp",
+      "url": "assets/images/places-real/tra-sua-susu-1.webp",
       "mimeType": "image/webp",
       "originalName": "tra-sua-susu-1.webp",
       "caption": "Ảnh không gian cà phê thực tế tham khảo · Trà sữa Susu",
@@ -1740,7 +1740,7 @@
     {
       "id": "img-doong-cha-real-01",
       "placeId": "doong-cha",
-      "url": "/assets/images/places-real/doong-cha-1.webp",
+      "url": "assets/images/places-real/doong-cha-1.webp",
       "mimeType": "image/webp",
       "originalName": "doong-cha-1.webp",
       "caption": "Hình ảnh thực tế Doong Cha",
@@ -1755,7 +1755,7 @@
     {
       "id": "img-v16-dir-nhu-nga-01",
       "placeId": "dir-nhu-nga",
-      "url": "/assets/images/places-real-v16/nha-hang-nhu-nga.webp",
+      "url": "assets/images/places-real-v16/nha-hang-nhu-nga.webp",
       "mimeType": "image/webp",
       "originalName": "nha-hang-nhu-nga.webp",
       "caption": "Bữa ăn gia đình Việt Nam",
@@ -1771,7 +1771,7 @@
     {
       "id": "img-v16-dir-huong-lua-23-quang-trung-01",
       "placeId": "dir-huong-lua-23-quang-trung",
-      "url": "/assets/images/places-real-v16/com-huong-lua.webp",
+      "url": "assets/images/places-real-v16/com-huong-lua.webp",
       "mimeType": "image/webp",
       "originalName": "com-huong-lua.webp",
       "caption": "Cơm và món ăn Việt Nam",
@@ -1787,7 +1787,7 @@
     {
       "id": "img-v16-dir-quan-an-huong-01",
       "placeId": "dir-quan-an-huong",
-      "url": "/assets/images/places-real-v16/quan-an-huong.webp",
+      "url": "assets/images/places-real-v16/quan-an-huong.webp",
       "mimeType": "image/webp",
       "originalName": "quan-an-huong.webp",
       "caption": "Món ăn đường phố Việt Nam",
@@ -1803,7 +1803,7 @@
     {
       "id": "img-v16-dir-hoan-linh-01",
       "placeId": "dir-hoan-linh",
-      "url": "/assets/images/places-real-v16/hoan-linh.webp",
+      "url": "assets/images/places-real-v16/hoan-linh.webp",
       "mimeType": "image/webp",
       "originalName": "hoan-linh.webp",
       "caption": "Mâm cơm Việt Nam",
@@ -1819,7 +1819,7 @@
     {
       "id": "img-v16-pho-dong-da-01",
       "placeId": "pho-dong-da",
-      "url": "/assets/images/places-real-v16/pho-dong-da.webp",
+      "url": "assets/images/places-real-v16/pho-dong-da.webp",
       "mimeType": "image/webp",
       "originalName": "pho-dong-da.webp",
       "caption": "Phở bò Việt Nam",
@@ -1835,7 +1835,7 @@
     {
       "id": "img-v16-nam-cuu-01",
       "placeId": "nam-cuu",
-      "url": "/assets/images/places-real-v16/nam-cuu.webp",
+      "url": "assets/images/places-real-v16/nam-cuu.webp",
       "mimeType": "image/webp",
       "originalName": "nam-cuu.webp",
       "caption": "Món ăn Việt Nam với tôm và thịt",
@@ -1851,7 +1851,7 @@
     {
       "id": "img-v16-com-ga-an-nhon-01",
       "placeId": "com-ga-an-nhon",
-      "url": "/assets/images/places-real-v16/com-ga-an-nhon.webp",
+      "url": "assets/images/places-real-v16/com-ga-an-nhon.webp",
       "mimeType": "image/webp",
       "originalName": "com-ga-an-nhon.webp",
       "caption": "Cơm gà Việt Nam",
@@ -1867,7 +1867,7 @@
     {
       "id": "img-v16-quan-ngon-tran-phu-01",
       "placeId": "quan-ngon-tran-phu",
-      "url": "/assets/images/places-real-v16/quan-ngon-tran-phu.webp",
+      "url": "assets/images/places-real-v16/quan-ngon-tran-phu.webp",
       "mimeType": "image/webp",
       "originalName": "quan-ngon-tran-phu.webp",
       "caption": "Quầy ẩm thực đường phố Việt Nam",
@@ -1883,7 +1883,7 @@
     {
       "id": "img-v16-nha-thuoc-an-nhon-01",
       "placeId": "nha-thuoc-an-nhon",
-      "url": "/assets/images/places-real-v16/nha-thuoc-an-nhon.webp",
+      "url": "assets/images/places-real-v16/nha-thuoc-an-nhon.webp",
       "mimeType": "image/webp",
       "originalName": "nha-thuoc-an-nhon.webp",
       "caption": "Không gian nhà thuốc thực tế",
@@ -1899,7 +1899,7 @@
     {
       "id": "img-v16-nha-thuoc-giang-san-01",
       "placeId": "nha-thuoc-giang-san",
-      "url": "/assets/images/places-real-v16/nha-thuoc-giang-san.webp",
+      "url": "assets/images/places-real-v16/nha-thuoc-giang-san.webp",
       "mimeType": "image/webp",
       "originalName": "nha-thuoc-giang-san.webp",
       "caption": "Tư vấn tại nhà thuốc",
@@ -1915,7 +1915,7 @@
     {
       "id": "img-v16-nha-thuoc-thich-24h-01",
       "placeId": "nha-thuoc-thich-24h",
-      "url": "/assets/images/places-real-v16/nha-thuoc-thich-24h.webp",
+      "url": "assets/images/places-real-v16/nha-thuoc-thich-24h.webp",
       "mimeType": "image/webp",
       "originalName": "nha-thuoc-thich-24h.webp",
       "caption": "Khu trưng bày dược phẩm",
@@ -1931,7 +1931,7 @@
     {
       "id": "img-v16-long-chau-160-tran-phu-01",
       "placeId": "long-chau-160-tran-phu",
-      "url": "/assets/images/places-real-v16/long-chau-160-tran-phu.webp",
+      "url": "assets/images/places-real-v16/long-chau-160-tran-phu.webp",
       "mimeType": "image/webp",
       "originalName": "long-chau-160-tran-phu.webp",
       "caption": "Ảnh thực tế hệ thống Nhà thuốc FPT Long Châu",
@@ -1947,7 +1947,7 @@
     {
       "id": "img-v16-pk-hvn-binh-an-01",
       "placeId": "pk-hvn-binh-an",
-      "url": "/assets/images/places-real-v16/pk-hvn-binh-an.webp",
+      "url": "assets/images/places-real-v16/pk-hvn-binh-an.webp",
       "mimeType": "image/webp",
       "originalName": "pk-hvn-binh-an.webp",
       "caption": "Tư vấn chăm sóc sức khỏe",
@@ -1963,7 +1963,7 @@
     {
       "id": "img-v16-pk-giang-san-01",
       "placeId": "pk-giang-san",
-      "url": "/assets/images/places-real-v16/pk-giang-san.webp",
+      "url": "assets/images/places-real-v16/pk-giang-san.webp",
       "mimeType": "image/webp",
       "originalName": "pk-giang-san.webp",
       "caption": "Nhân viên y tế chuẩn bị sản phẩm chăm sóc sức khỏe",
@@ -1979,7 +1979,7 @@
     {
       "id": "img-v16-pk-bs-le-thai-binh-01",
       "placeId": "pk-bs-le-thai-binh",
-      "url": "/assets/images/places-real-v16/pk-bs-le-thai-binh.webp",
+      "url": "assets/images/places-real-v16/pk-bs-le-thai-binh.webp",
       "mimeType": "image/webp",
       "originalName": "pk-bs-le-thai-binh.webp",
       "caption": "Tư vấn sức khỏe tại cơ sở y tế",
