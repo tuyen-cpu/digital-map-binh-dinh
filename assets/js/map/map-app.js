@@ -14,7 +14,7 @@ let routeShowsOutsideBoundary = false;
 const markerById = new Map();
 
 const ids = [
-  "categoryTitle","categoryDescription","categoryGrid","resultList","resultCount","showAllButton","refreshCategoryButton","regionDataButton","searchInput","clearSearchButton","zoomInButton","zoomOutButton","locateButton","resetViewButton","boundaryStatus","boundaryStatusText","toast","menuButton","dataState","map","mapPanel","panelDrag","panelContent","mapPanelCloseButton","mapPanelOpenButton","placePreview","closePlacePreview","previewImageWrap","previewImage","previewCategory","previewName","previewAddress","previewDescription","previewFacts","previewDetailLink","previewRouteButton","previewPanoramaButton","panoramaDialog","closePanoramaButton","panoramaTitle","panoramaStatus","panoramaCanvas","routeDialog","closeRouteDialog","routeDestinationName","routeDialogDrag","useCurrentLocationButton","routeOriginInput","searchRouteOriginButton","routeOriginResults","routeDialogStatus","routeSummary","closeRouteSummary","routeSummaryTitle","routeSummaryOrigin","routeDistance","routeDuration","routeNavigationStatus","toggleRouteSteps","startNavigationButton","routeSteps","journeyDialog","closeJourneyDialog","journeyLocationTitle","journeyLocationText","journeyUseCurrentButton","journeyCurrentLabel","journeyOriginInput","journeySearchOriginButton","journeyOriginResults","journeyDestinationInput","journeyDestinationResults","journeyStatus","journeyExploreButton","journeyStartButton"
+  "categoryTitle","categoryDescription","categoryGrid","resultList","resultCount","showAllButton","refreshCategoryButton","regionDataButton","searchInput","clearSearchButton","zoomInButton","zoomOutButton","locateButton","resetViewButton","boundaryStatus","boundaryStatusText","toast","menuButton","dataState","map","mapPanel","panelDrag","panelContent","mapPanelCloseButton","mapPanelOpenButton","placePreview","closePlacePreview","previewImageWrap","previewImage","previewCategory","previewName","previewAddress","previewDescription","previewFacts","previewDetailLink","previewRouteButton","previewPanoramaButton","panoramaDialog","closePanoramaButton","panoramaTitle","panoramaStatus","panoramaCanvas","routeDialog","closeRouteDialog","routeDestinationName","routeDialogDrag","useCurrentLocationButton","routeOriginInput","searchRouteOriginButton","routeOriginResults","routeDialogStatus","routeSummary","routeSummaryDrag","closeRouteSummary","routeSummaryTitle","routeSummaryOrigin","routeDistance","routeDuration","routeNavigationStatus","toggleRouteSteps","startNavigationButton","routeSteps","journeyDialog","closeJourneyDialog","journeyLocationTitle","journeyLocationText","journeyUseCurrentButton","journeyCurrentLabel","journeyOriginInput","journeySearchOriginButton","journeyOriginResults","journeyDestinationInput","journeyDestinationResults","journeyStatus","journeyExploreButton","journeyStartButton"
 ];
 const el = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
 
@@ -591,6 +591,7 @@ function renderRouteSummary(routeState) {
   el.startNavigationButton.textContent = "Theo dõi vị trí";
   el.routeSummary.hidden = false;
   if (isMobileMap()) setMobileSheetState("hidden");
+  requestAnimationFrame(() => resetRouteSummarySheet());
 }
 
 function clearRoute({ restoreSheet = true } = {}) {
@@ -598,6 +599,7 @@ function clearRoute({ restoreSheet = true } = {}) {
   activeRoute = null;
   routeLayerGroup?.clearLayers();
   el.routeSummary.hidden = true;
+  resetRouteSummarySheet();
   setBoundaryRouteMode(false);
   if (restoreSheet && isMobileMap()) setMobileSheetState("default");
 }
@@ -985,6 +987,90 @@ function bindRouteDialogDrag() {
   });
 }
 
+let resetRouteSummarySheet = () => {};
+
+function bindRouteSummaryDrag() {
+  const handle = el.routeSummaryDrag;
+  const sheet = el.routeSummary;
+  if (!handle || !sheet) return;
+
+  const PEEK_HEIGHT = 48;
+  const SNAP_THRESHOLD = 60;
+
+  let sheetState = "expanded";
+  let startY = 0;
+  let startTranslate = 0;
+  let moved = false;
+
+  const getTranslateForState = state => {
+    if (state === "expanded") return 0;
+    return Math.max(0, sheet.getBoundingClientRect().height - PEEK_HEIGHT);
+  };
+
+  const snapTo = (state, animate = true) => {
+    sheetState = state;
+    const y = isMobileMap() ? getTranslateForState(state) : 0;
+    sheet.style.transition = animate ? "transform 0.28s cubic-bezier(0.25,0.46,0.45,0.94)" : "none";
+    sheet.style.transform = y ? `translateY(${y}px)` : "";
+    sheet.classList.toggle("dragging-dismiss", state === "collapsed" && isMobileMap());
+    sheet.classList.toggle("route-summary-collapsed", state === "collapsed" && isMobileMap());
+    handle.setAttribute("aria-label", state === "expanded" ? "Thu nhỏ bảng dẫn đường" : "Mở rộng bảng dẫn đường");
+  };
+
+  resetRouteSummarySheet = () => {
+    sheetState = "expanded";
+    sheet.style.transform = "";
+    sheet.style.transition = "";
+    sheet.classList.remove("dragging-dismiss", "route-summary-collapsed");
+    handle.setAttribute("aria-label", "Thu nhỏ bảng dẫn đường");
+  };
+
+  const finish = event => {
+    if (!handle.hasPointerCapture?.(event.pointerId)) return;
+    handle.releasePointerCapture(event.pointerId);
+    if (!isMobileMap()) return resetRouteSummarySheet();
+
+    const delta = event.clientY - startY;
+    if (!moved) {
+      snapTo(sheetState === "expanded" ? "collapsed" : "expanded");
+      return;
+    }
+    if (sheetState === "expanded" && delta > SNAP_THRESHOLD) snapTo("collapsed");
+    else if (sheetState === "collapsed" && delta < -SNAP_THRESHOLD) snapTo("expanded");
+    else snapTo(sheetState);
+  };
+
+  handle.addEventListener("pointerdown", event => {
+    if (!isMobileMap() || sheet.hidden) return;
+    startY = event.clientY;
+    moved = false;
+    const m = new DOMMatrix(getComputedStyle(sheet).transform);
+    startTranslate = m.m42;
+    sheet.classList.add("dragging-dismiss");
+    sheet.style.transition = "none";
+    handle.setPointerCapture(event.pointerId);
+  });
+
+  handle.addEventListener("pointermove", event => {
+    if (!handle.hasPointerCapture?.(event.pointerId) || !isMobileMap()) return;
+    const delta = event.clientY - startY;
+    if (Math.abs(delta) > 4) moved = true;
+    const maxDown = Math.max(0, sheet.getBoundingClientRect().height - PEEK_HEIGHT);
+    sheet.style.transform = `translateY(${Math.min(maxDown, Math.max(-6, startTranslate + delta))}px)`;
+  });
+
+  handle.addEventListener("pointerup", finish);
+  handle.addEventListener("pointercancel", event => {
+    if (!handle.hasPointerCapture?.(event.pointerId)) return;
+    handle.releasePointerCapture(event.pointerId);
+    snapTo(sheetState);
+  });
+
+  window.addEventListener("resize", () => {
+    if (!isMobileMap()) resetRouteSummarySheet();
+  }, { passive: true });
+}
+
 function closeMobileMenu() {
   const header = document.querySelector(".site-header");
   header?.classList.remove("menu-open");
@@ -1145,6 +1231,7 @@ function bindUI() {
   el.startNavigationButton.addEventListener("click", () => navigationWatchId == null ? startNavigation() : stopNavigation());
   bindMobileSheet();
   bindRouteDialogDrag();
+  bindRouteSummaryDrag();
   el.mapPanelCloseButton?.addEventListener("click", () => setMobileSheetState("hidden"));
   el.mapPanelOpenButton?.addEventListener("click", () => {
     closeMobileMenu();

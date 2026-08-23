@@ -1618,14 +1618,24 @@ left: calc(410px + 22px + 12px);
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
     border-radius: 18px !important;
+    padding-top: 0 !important;
     padding-bottom: calc(15px + env(safe-area-inset-bottom));
   }
+  .route-summary.dragging-dismiss {
+    overflow: visible !important;
+  }
+  .route-summary.route-summary-collapsed {
+    pointer-events: none !important;
+  }
+  .route-summary.route-summary-collapsed .route-summary-drag,
+  .route-summary.route-summary-collapsed .route-summary-close {
+    pointer-events: auto !important;
+  }
   .route-summary-close {
-    position: sticky !important;
-    float: right;
-    top: 0 !important;
-    right: 0 !important;
-    z-index: 3;
+    position: absolute !important;
+    top: 6px !important;
+    right: 8px !important;
+    z-index: 6;
   }
   .route-steps {
     max-height: 28dvh !important;
@@ -2264,5 +2274,48 @@ left: calc(410px + 22px + 12px);
   }
   .route-dialog.route-collapsed .route-dialog-drag {
     pointer-events: auto !important;
+  }
+}
+
+.route-summary-drag {
+  display: none;
+}
+
+@media (max-width: 980px) {
+  .route-summary-drag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 44px;
+    width: calc(100% + 30px);
+    margin: 0 -15px 4px;
+    height: 44px;
+    border: 0;
+    padding: 0 44px;
+    cursor: ns-resize;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    background: #fff;
+    border-radius: 18px 18px 0 0;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+  }
+  .route-summary-drag span {
+    display: block;
+    width: 44px;
+    height: 5px;
+    border-radius: 999px;
+    background: #c8dce8;
+    pointer-events: none;
+    transition: background 0.2s;
+  }
+  .route-summary-drag:active span {
+    background: #9abdd0;
+  }
+  .route-summary {
+    will-change: transform;
   }
 }
