@@ -1412,6 +1412,7 @@ left: calc(410px + 22px + 12px);
   }
 
   .map-panel {
+    z-index: 999;
     left: 8px !important;
     right: 8px !important;
     bottom: max(8px, env(safe-area-inset-bottom)) !important;
