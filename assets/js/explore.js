@@ -3,8 +3,8 @@
  * URL: /kham-pha-dia-diem.html
  */
 
-import { api } from "/assets/js/core/api.js";
-import { CATEGORY_META } from "/assets/js/core/categories.js";
+import { api } from "./core/api.js";
+import { CATEGORY_META } from "./core/categories.js";
 
 const PAGE_SIZE = 12;
 
