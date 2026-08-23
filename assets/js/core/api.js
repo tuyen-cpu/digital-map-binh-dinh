@@ -1,8 +1,9 @@
 const SITE_DB_NAME = "binh-dinh-tourism-netlify-demo-v16";
 const SITE_DB_VERSION = 1;
 const SITE_SESSION_KEY = "bd_tourism_demo_admin";
-const SEED_URL = "/data/site-data.json";
-const BOUNDARY_URL = "/data/boundary.json";
+const SITE_ROOT = new URL("../../../", import.meta.url);
+const SEED_URL = new URL("data/site-data.json", SITE_ROOT).href;
+const BOUNDARY_URL = new URL("data/boundary.json", SITE_ROOT).href;
 const ADMIN_USERNAME = "admin";
 const ADMIN_PASSWORD = "BinhDinh@2026";
 
