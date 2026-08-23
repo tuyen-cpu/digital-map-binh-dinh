@@ -35,11 +35,13 @@ jobs:
           # Sửa detailUrl trong api.js
           sed -i "s|detailUrl: \`/place\.html|detailUrl: \`${BASE}/place.html|g" ./assets/js/core/api.js
 
-          # Sửa location.replace trong admin JS
-          sed -i "s|location\.replace(\"/admin/dashboard\")|location.replace(\"${BASE}/admin/dashboard\")|g" ./assets/js/admin/login.js
-          sed -i "s|location\.replace(\"/admin\")|location.replace(\"${BASE}/admin\")|g" ./assets/js/admin/login.js
-          sed -i "s|location\.replace(\"/admin\")|location.replace(\"${BASE}/admin\")|g" ./assets/js/admin/dashboard.js
-          sed -i "s|location\.replace(\"/admin/dashboard\")|location.replace(\"${BASE}/admin/dashboard\")|g" ./assets/js/admin/register.js
+          # Sửa location.replace trong các admin JS (chỉ sửa nếu file tồn tại)
+          for f in ./assets/js/admin/login.js ./assets/js/admin/dashboard.js ./assets/js/admin/register.js; do
+            [ -f "$f" ] && sed -i \
+              -e "s|location\.replace(\"/admin/dashboard\")|location.replace(\"${BASE}/admin/dashboard\")|g" \
+              -e "s|location\.replace(\"/admin\")|location.replace(\"${BASE}/admin\")|g" \
+              "$f"
+          done
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
