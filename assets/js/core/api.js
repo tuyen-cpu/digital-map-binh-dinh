@@ -500,7 +500,7 @@ function enrichPlace(place, images, panoramas, article) {
     imageCount: images.length,
     panoramaCount: panoramas.length,
     hasArticle: Boolean(article && article.status === "published"),
-    detailUrl: `/place.html?id=${encodeURIComponent(place.id)}`
+    detailUrl: `place.html?id=${encodeURIComponent(place.id)}`
   };
 }
 
