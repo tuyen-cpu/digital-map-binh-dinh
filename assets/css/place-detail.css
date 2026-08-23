@@ -4,7 +4,7 @@
 /* v8: route link + self-hosted panorama */
 .detail-button{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}.detail-button.disabled{opacity:.5;pointer-events:none}.location-viewer.pnlm-container{width:100%;height:100%}.location-viewer .pnlm-title-box{font-size:14px}.location-viewer .pnlm-author-box{font-size:10px}
 
-.detail-body .site-footer{margin-top:24px}.detail-body .site-footer p{display:none}@media(max-width:640px){.detail-body .site-footer{padding:14px 18px;min-height:auto}}
+.detail-body .site-footer{margin-top:24px}@media(max-width:640px){.detail-body .site-footer{padding:28px 16px 18px}}
 
 /* v13 mobile detail refinements */
 .close-360-button{background:#fff1f1!important;color:#a94c55!important;border-color:#f0d0d4!important}

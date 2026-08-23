@@ -14,7 +14,7 @@ let routeShowsOutsideBoundary = false;
 const markerById = new Map();
 
 const ids = [
-  "categoryTitle","categoryDescription","categoryGrid","resultList","resultCount","showAllButton","refreshCategoryButton","regionDataButton","searchInput","clearSearchButton","zoomInButton","zoomOutButton","locateButton","resetViewButton","boundaryStatus","boundaryStatusText","toast","menuButton","dataState","map","mapPanel","panelDrag","panelContent","mapPanelCloseButton","mapPanelOpenButton","placePreview","closePlacePreview","previewImageWrap","previewImage","previewCategory","previewName","previewAddress","previewDescription","previewFacts","previewDetailLink","previewRouteButton","previewPanoramaButton","panoramaDialog","closePanoramaButton","panoramaTitle","panoramaStatus","panoramaCanvas","routeDialog","closeRouteDialog","routeDestinationName","useCurrentLocationButton","routeOriginInput","searchRouteOriginButton","routeOriginResults","routeDialogStatus","routeSummary","closeRouteSummary","routeSummaryTitle","routeSummaryOrigin","routeDistance","routeDuration","routeNavigationStatus","toggleRouteSteps","startNavigationButton","routeSteps","journeyDialog","closeJourneyDialog","journeyLocationTitle","journeyLocationText","journeyUseCurrentButton","journeyCurrentLabel","journeyOriginInput","journeySearchOriginButton","journeyOriginResults","journeyDestinationInput","journeyDestinationResults","journeyStatus","journeyExploreButton","journeyStartButton"
+  "categoryTitle","categoryDescription","categoryGrid","resultList","resultCount","showAllButton","refreshCategoryButton","regionDataButton","searchInput","clearSearchButton","zoomInButton","zoomOutButton","locateButton","resetViewButton","boundaryStatus","boundaryStatusText","toast","menuButton","dataState","map","mapPanel","panelDrag","panelContent","mapPanelCloseButton","mapPanelOpenButton","placePreview","closePlacePreview","previewImageWrap","previewImage","previewCategory","previewName","previewAddress","previewDescription","previewFacts","previewDetailLink","previewRouteButton","previewPanoramaButton","panoramaDialog","closePanoramaButton","panoramaTitle","panoramaStatus","panoramaCanvas","routeDialog","closeRouteDialog","routeDestinationName","routeDialogDrag","useCurrentLocationButton","routeOriginInput","searchRouteOriginButton","routeOriginResults","routeDialogStatus","routeSummary","closeRouteSummary","routeSummaryTitle","routeSummaryOrigin","routeDistance","routeDuration","routeNavigationStatus","toggleRouteSteps","startNavigationButton","routeSteps","journeyDialog","closeJourneyDialog","journeyLocationTitle","journeyLocationText","journeyUseCurrentButton","journeyCurrentLabel","journeyOriginInput","journeySearchOriginButton","journeyOriginResults","journeyDestinationInput","journeyDestinationResults","journeyStatus","journeyExploreButton","journeyStartButton"
 ];
 const el = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
 
@@ -486,7 +486,10 @@ function openRoutePlanner() {
   el.routeDialogStatus.classList.remove("error");
   hidePlacePreview({ clearSelection: false });
   if (isMobileMap()) setMobileSheetState("hidden");
-  if (!el.routeDialog.open) el.routeDialog.showModal();
+  if (!el.routeDialog.open) {
+    el.routeDialog.setAttribute("aria-modal", "false");
+    el.routeDialog.show();
+  }
   setTimeout(() => el.routeOriginInput.focus({ preventScroll: true }), 80);
 }
 
@@ -873,6 +876,115 @@ function bindMobileSheet() {
   setMobileSheetState("default");
 }
 
+// Drag-to-dismiss cho routeDialog trên mobile
+// Bottom-sheet drag cho routeDialog trên mobile
+// Trạng thái: "expanded" (full) ↔ "collapsed" (chỉ còn handle nhô lên ở đáy)
+// Kéo lên từ collapsed → expanded; kéo xuống từ expanded → collapsed
+function bindRouteDialogDrag() {
+  const handle = el.routeDialogDrag;
+  const dialog = el.routeDialog;
+  if (!handle || !dialog) return;
+
+  // Chiều cao phần nhô lên khi collapsed (chỉ drag handle)
+  const PEEK_HEIGHT = 48;
+  // Ngưỡng delta để snap (px)
+  const SNAP_THRESHOLD = 60;
+
+  let routeSheetState = "expanded"; // "expanded" | "collapsed"
+  let startY = 0;
+  let startTranslate = 0;
+  let moved = false;
+
+  // Tính translateY tương ứng với từng trạng thái
+  const getTranslateForState = state => {
+    if (state === "expanded") return 0;
+    // collapsed: trượt xuống sao cho chỉ còn PEEK_HEIGHT nhô lên
+    return dialog.getBoundingClientRect().height - PEEK_HEIGHT;
+  };
+
+  const snapTo = (state, animate = true) => {
+    routeSheetState = state;
+    const y = getTranslateForState(state);
+    if (animate) {
+      dialog.style.transition = "transform 0.28s cubic-bezier(0.25,0.46,0.45,0.94)";
+    } else {
+      dialog.style.transition = "none";
+    }
+    dialog.style.transform = `translateY(${y}px)`;
+    if (state === "collapsed") {
+      dialog.classList.add("dragging-dismiss");
+      dialog.classList.add("route-collapsed");
+    } else {
+      dialog.classList.remove("dragging-dismiss");
+      dialog.classList.remove("route-collapsed");
+    }
+    // Cập nhật aria để screen reader biết trạng thái
+    handle.setAttribute("aria-label", state === "expanded" ? "Thu nhỏ hộp dẫn đường" : "Mở rộng hộp dẫn đường");
+  };
+
+  const finish = event => {
+    if (!handle.hasPointerCapture?.(event.pointerId)) return;
+    handle.releasePointerCapture(event.pointerId);
+
+    const delta = event.clientY - startY;
+
+    if (!moved) {
+      // Tap đơn → toggle
+      snapTo(routeSheetState === "expanded" ? "collapsed" : "expanded");
+      return;
+    }
+
+    // Snap dựa theo hướng kéo và ngưỡng
+    if (routeSheetState === "expanded" && delta > SNAP_THRESHOLD) {
+      snapTo("collapsed");
+    } else if (routeSheetState === "collapsed" && delta < -SNAP_THRESHOLD) {
+      snapTo("expanded");
+    } else {
+      // Chưa đủ ngưỡng → snap về trạng thái cũ
+      snapTo(routeSheetState);
+    }
+  };
+
+  handle.addEventListener("pointerdown", event => {
+    if (window.innerWidth > 980) return;
+    startY = event.clientY;
+    moved = false;
+    // Đọc translate hiện tại làm điểm bắt đầu
+    const m = new DOMMatrix(getComputedStyle(dialog).transform);
+    startTranslate = m.m42; // translateY
+    dialog.classList.add("dragging-dismiss");
+    dialog.style.transition = "none";
+    handle.setPointerCapture(event.pointerId);
+  });
+
+  handle.addEventListener("pointermove", event => {
+    if (!handle.hasPointerCapture?.(event.pointerId) || window.innerWidth > 980) return;
+    const delta = event.clientY - startY;
+    if (Math.abs(delta) > 4) moved = true;
+
+    const dialogH = dialog.getBoundingClientRect().height;
+    const maxDown = dialogH - PEEK_HEIGHT; // không cho trượt thấp hơn collapsed
+    const newY = Math.min(maxDown, Math.max(-6, startTranslate + delta));
+    dialog.style.transform = `translateY(${newY}px)`;
+  });
+
+  handle.addEventListener("pointerup", finish);
+  handle.addEventListener("pointercancel", event => {
+    if (!handle.hasPointerCapture?.(event.pointerId)) return;
+    handle.releasePointerCapture(event.pointerId);
+    snapTo(routeSheetState); // snap về trạng thái hiện tại
+  });
+
+  // Khi dialog mở: luôn bắt đầu ở expanded
+  dialog.addEventListener("close", () => {
+    routeSheetState = "expanded";
+    dialog.style.transform = "";
+    dialog.style.transition = "";
+    dialog.classList.remove("dragging-dismiss");
+    dialog.classList.remove("route-collapsed");
+  });
+}
+
 function closeMobileMenu() {
   const header = document.querySelector(".site-header");
   header?.classList.remove("menu-open");
@@ -993,7 +1105,6 @@ function bindUI() {
     el.searchRouteOriginButton.disabled = false;
     if (isMobileMap() && !activeRoute) setMobileSheetState("default");
   });
-  bindDialogBackdropClose(el.routeDialog);
   el.closeJourneyDialog?.addEventListener("click", () => closeDialogIfOpen(el.journeyDialog));
   el.journeyUseCurrentButton?.addEventListener("click", useCurrentLocationForJourney);
   el.journeySearchOriginButton?.addEventListener("click", searchJourneyOrigin);
@@ -1033,6 +1144,7 @@ function bindUI() {
   });
   el.startNavigationButton.addEventListener("click", () => navigationWatchId == null ? startNavigation() : stopNavigation());
   bindMobileSheet();
+  bindRouteDialogDrag();
   el.mapPanelCloseButton?.addEventListener("click", () => setMobileSheetState("hidden"));
   el.mapPanelOpenButton?.addEventListener("click", () => {
     closeMobileMenu();
