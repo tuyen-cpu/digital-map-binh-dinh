@@ -73,7 +73,7 @@ function render({ place, images = [], panoramas = [], article }) {
   byId("priceInfo").hidden = !place.priceRange;
   byId("infoCoords").textContent = hasCoords(place) ? `${Number(place.lat).toFixed(6)}, ${Number(place.lng).toFixed(6)}` : "Đang cập nhật";
 
-  byId("routeToButton").href = hasCoords(place) ? `?routeTo=${encodeURIComponent(place.id)}` : "/";
+  byId("routeToButton").href = hasCoords(place) ? `index.html?routeTo=${encodeURIComponent(place.id)}` : "/";
   byId("routeToButton").classList.toggle("disabled", !hasCoords(place));
   byId("show360Button").disabled = panoramas.length === 0;
   if (!hasCoords(place) && !panoramas.length) byId("locationStatus").textContent = "Thông tin vị trí và không gian 360° đang được cập nhật.";
