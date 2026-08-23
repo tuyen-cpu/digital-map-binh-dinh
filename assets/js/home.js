@@ -9,27 +9,27 @@ import { CATEGORY_META } from "./core/categories.js";
 // ---- Slideshow config ----
 const SLIDES = [
   {
-    img: "/assets/images/places-real/chua-thien-an-1.webp",
+    img: "assets/images/places-real/chua-thien-an-1.webp",
     caption: "Chùa Thiên An",
   },
   {
-    img: "/assets/images/places-real/cong-vien-trung-tam-1.webp",
+    img: "assets/images/places-real/cong-vien-trung-tam-1.webp",
     caption: "Công viên Trung tâm",
   },
   {
-    img: "/assets/images/places-real/nha-van-hoa-an-nhon-1.webp",
+    img: "assets/images/places-real/nha-van-hoa-an-nhon-1.webp",
     caption: "Nhà văn hóa An Nhơn",
   },
   {
-    img: "/assets/images/places-real/ga-binh-dinh-1.webp",
+    img: "assets/images/places-real/ga-binh-dinh-1.webp",
     caption: "Ga Bình Định",
   },
   {
-    img: "/assets/images/places-real/cong-vien-nuoc-an-nhon-1.webp",
+    img: "assets/images/places-real/cong-vien-nuoc-an-nhon-1.webp",
     caption: "Công viên nước An Nhơn",
   },
   {
-    img: "/assets/images/places-real/cho-binh-dinh-1.webp",
+    img: "assets/images/places-real/cho-binh-dinh-1.webp",
     caption: "Chợ Bình Định",
   },
 ];
