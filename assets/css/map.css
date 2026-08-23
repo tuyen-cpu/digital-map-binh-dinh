@@ -479,9 +479,9 @@ left: calc(410px + 22px + 12px);
   }
 }
 @media (max-width: 560px) {
-  .brand-copy small {
+  /* .brand-copy small {
     display: none;
-  }
+  } */
   .brand-copy strong {
     font-size: 15px;
   }
