@@ -23,23 +23,46 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Inject base href and rewrite absolute paths
+      - name: Inject base href and fix JS paths
         run: |
-          BASE="/digital-map-binh-dinh"
+          python3 - << 'PYEOF'
+          import os, re
 
-          # Thêm <base href> vào tất cả HTML
-          find . -name "*.html" -not -path "./.git/*" | while read f; do
-            sed -i "s|<head>|<head>\n  <base href=\"${BASE}/\">|g" "$f"
-          done
+          BASE = "/digital-map-binh-dinh"
 
-          # Sửa detailUrl trong api.js
-          sed -i "s|detailUrl: \`/place\.html|detailUrl: \`${BASE}/place.html|g" ./assets/js/core/api.js
+          for root, dirs, files in os.walk("."):
+              dirs[:] = [d for d in dirs if d not in [".git", ".github"]]
+              for fname in files:
+                  path = os.path.join(root, fname)
 
-          # Sửa location.replace trong admin JS
-          sed -i "s|location\.replace(\"/admin/dashboard\")|location.replace(\"${BASE}/admin/dashboard\")|g" ./assets/js/admin/login.js
-          sed -i "s|location\.replace(\"/admin\")|location.replace(\"${BASE}/admin\")|g" ./assets/js/admin/login.js
-          sed -i "s|location\.replace(\"/admin\")|location.replace(\"${BASE}/admin\")|g" ./assets/js/admin/dashboard.js
-          sed -i "s|location\.replace(\"/admin/dashboard\")|location.replace(\"${BASE}/admin/dashboard\")|g" ./assets/js/admin/register.js
+                  if fname.endswith(".html"):
+                      with open(path, "r", encoding="utf-8") as f:
+                          content = f.read()
+                      new_content = re.sub(
+                          r"(<head\b[^>]*>)",
+                          r'\1\n  <base href="' + BASE + '/">',
+                          content, count=1, flags=re.IGNORECASE
+                      )
+                      if new_content != content:
+                          with open(path, "w", encoding="utf-8") as f:
+                              f.write(new_content)
+                          print("Patched HTML:", path)
+
+                  elif fname.endswith(".js"):
+                      with open(path, "r", encoding="utf-8") as f:
+                          content = f.read()
+                      new_content = content \
+                          .replace('location.replace("/admin/dashboard")',
+                                   'location.replace("' + BASE + '/admin/dashboard")') \
+                          .replace('location.replace("/admin")',
+                                   'location.replace("' + BASE + '/admin")')
+                      if new_content != content:
+                          with open(path, "w", encoding="utf-8") as f:
+                              f.write(new_content)
+                          print("Patched JS:", path)
+
+          print("Done.")
+          PYEOF
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
