@@ -11,9 +11,6 @@ permissions:
   pages: write
   id-token: write
 
-env:
-  BASE: /digital-map-binh-dinh
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -25,27 +22,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Rewrite absolute paths for GitHub Pages base
-        run: |
-          BASE="/digital-map-binh-dinh"
-
-          # 1. Thêm <base href> vào <head> của mọi file HTML
-          find ./public -name "*.html" | while read f; do
-            sed -i "s|<head>|<head>\n  <base href=\"${BASE}/\">|g" "$f"
-          done
-
-          # 2. Sửa detailUrl trong api.js: /place.html → BASE/place.html
-          sed -i "s|detailUrl: \`/place\.html|detailUrl: \`${BASE}/place.html|g" ./public/assets/js/core/api.js
-
-          # 3. Sửa location.replace trong admin JS
-          sed -i "s|location\.replace(\"/admin/dashboard\")|location.replace(\"${BASE}/admin/dashboard\")|g" ./public/assets/js/admin/login.js
-          sed -i "s|location\.replace(\"/admin\")|location.replace(\"${BASE}/admin\")|g" ./public/assets/js/admin/login.js
-          sed -i "s|location\.replace(\"/admin\")|location.replace(\"${BASE}/admin\")|g" ./public/assets/js/admin/dashboard.js
-
-          # 4. Sửa href="/" trong place.html (nút ← Bản đồ)
-          sed -i "s|href=\"/\"|href=\"${BASE}/\"|g" ./public/place.html
-          sed -i "s|href=\"/admin\"|href=\"${BASE}/admin\"|g" ./public/place.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
