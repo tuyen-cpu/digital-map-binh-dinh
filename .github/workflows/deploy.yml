@@ -23,13 +23,31 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Inject base href and rewrite absolute paths
+        run: |
+          BASE="/digital-map-binh-dinh"
+
+          # Thêm <base href> vào tất cả HTML
+          find . -name "*.html" -not -path "./.git/*" | while read f; do
+            sed -i "s|<head>|<head>\n  <base href=\"${BASE}/\">|g" "$f"
+          done
+
+          # Sửa detailUrl trong api.js
+          sed -i "s|detailUrl: \`/place\.html|detailUrl: \`${BASE}/place.html|g" ./assets/js/core/api.js
+
+          # Sửa location.replace trong admin JS
+          sed -i "s|location\.replace(\"/admin/dashboard\")|location.replace(\"${BASE}/admin/dashboard\")|g" ./assets/js/admin/login.js
+          sed -i "s|location\.replace(\"/admin\")|location.replace(\"${BASE}/admin\")|g" ./assets/js/admin/login.js
+          sed -i "s|location\.replace(\"/admin\")|location.replace(\"${BASE}/admin\")|g" ./assets/js/admin/dashboard.js
+          sed -i "s|location\.replace(\"/admin/dashboard\")|location.replace(\"${BASE}/admin/dashboard\")|g" ./assets/js/admin/register.js
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload public folder
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './public'
+          path: '.'
 
       - name: Deploy to GitHub Pages
         id: deployment
