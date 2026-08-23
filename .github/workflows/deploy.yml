@@ -23,45 +23,62 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Inject base href and fix JS paths
+      - name: Patch paths for GitHub Pages subpath
         run: |
           python3 - << 'PYEOF'
           import os, re
 
           BASE = "/digital-map-binh-dinh"
 
+          # Các pattern cần replace trong HTML
+          HTML_REPLACEMENTS = [
+              # CSS/JS src và href tuyệt đối -> có base path
+              ('href="/assets/', 'href="' + BASE + '/assets/'),
+              ('src="/assets/',  'src="'  + BASE + '/assets/'),
+              ('href="/data/',   'href="' + BASE + '/data/'),
+              ('src="/data/',    'src="'  + BASE + '/data/'),
+              # Link nội bộ
+              ('href="/admin"',          'href="' + BASE + '/admin"'),
+              ('href="/admin/',          'href="' + BASE + '/admin/'),
+              ('href="/trang-chu.html"', 'href="' + BASE + '/trang-chu.html"'),
+              ('href="/kham-pha-dia-diem.html"', 'href="' + BASE + '/kham-pha-dia-diem.html"'),
+              ('href="/place.html',      'href="' + BASE + '/place.html'),
+              ('href="/"',               'href="' + BASE + '/"'),
+              ('href="/\">',             'href="' + BASE + '/\">'),
+          ]
+
+          # Các pattern cần replace trong JS
+          JS_REPLACEMENTS = [
+              ('location.replace("/admin/dashboard")', 'location.replace("' + BASE + '/admin/dashboard")'),
+              ('location.replace("/admin")',           'location.replace("' + BASE + '/admin")'),
+              ('detailUrl: `/place.html',              'detailUrl: `' + BASE + '/place.html'),
+              ('href="/\\"',                           'href="' + BASE + '/\\"'),
+              ('href="/?routeTo',                      'href="' + BASE + '/?routeTo'),
+          ]
+
           for root, dirs, files in os.walk("."):
               dirs[:] = [d for d in dirs if d not in [".git", ".github"]]
               for fname in files:
                   path = os.path.join(root, fname)
+                  ext = os.path.splitext(fname)[1]
 
-                  if fname.endswith(".html"):
-                      with open(path, "r", encoding="utf-8") as f:
-                          content = f.read()
-                      new_content = re.sub(
-                          r"(<head\b[^>]*>)",
-                          r'\1\n  <base href="' + BASE + '/">',
-                          content, count=1, flags=re.IGNORECASE
-                      )
-                      if new_content != content:
-                          with open(path, "w", encoding="utf-8") as f:
-                              f.write(new_content)
-                          print("Patched HTML:", path)
+                  if ext not in (".html", ".js"):
+                      continue
 
-                  elif fname.endswith(".js"):
-                      with open(path, "r", encoding="utf-8") as f:
-                          content = f.read()
-                      new_content = content \
-                          .replace('location.replace("/admin/dashboard")',
-                                   'location.replace("' + BASE + '/admin/dashboard")') \
-                          .replace('location.replace("/admin")',
-                                   'location.replace("' + BASE + '/admin")')
-                      if new_content != content:
-                          with open(path, "w", encoding="utf-8") as f:
-                              f.write(new_content)
-                          print("Patched JS:", path)
+                  with open(path, "r", encoding="utf-8") as f:
+                      content = f.read()
 
-          print("Done.")
+                  new_content = content
+                  replacements = HTML_REPLACEMENTS if ext == ".html" else JS_REPLACEMENTS
+                  for old, new in replacements:
+                      new_content = new_content.replace(old, new)
+
+                  if new_content != content:
+                      with open(path, "w", encoding="utf-8") as f:
+                          f.write(new_content)
+                      print("Patched:", path)
+
+          print("All done.")
           PYEOF
 
       - name: Setup Pages
