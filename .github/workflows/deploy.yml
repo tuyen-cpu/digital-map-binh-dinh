@@ -1,0 +1,80 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set base path
+        # Tên repo trên GitHub — đổi nếu đổi tên repo
+        run: echo "BASE=/digital-map-binh-dinh" >> $GITHUB_ENV
+
+      - name: Rewrite asset paths in HTML files
+        run: |
+          # Thay thế href="assets/ và src="assets/ thành href="/BASE/assets/
+          # Áp dụng cho tất cả file .html trong mọi thư mục
+          find . -name "*.html" -not -path "./.git/*" | while read file; do
+            sed -i \
+              -e "s|href=\"assets/|href=\"$BASE/assets/|g" \
+              -e "s|src=\"assets/|src=\"$BASE/assets/|g" \
+              -e "s|href='assets/|href='$BASE/assets/|g" \
+              -e "s|src='assets/|src='$BASE/assets/|g" \
+              "$file"
+          done
+
+      - name: Rewrite data/ and uploads/ paths in HTML and JS files
+        run: |
+          find . \( -name "*.html" -o -name "*.js" \) -not -path "./.git/*" | while read file; do
+            sed -i \
+              -e "s|href=\"data/|href=\"$BASE/data/|g" \
+              -e "s|src=\"data/|src=\"$BASE/data/|g" \
+              -e "s|['\"]data/|\"$BASE/data/|g" \
+              -e "s|['\"]uploads/|\"$BASE/uploads/|g" \
+              "$file"
+          done
+
+      - name: Rewrite internal page links in HTML files
+        run: |
+          # Các link nội bộ như href="trang-chu.html", href="admin/"
+          find . -name "*.html" -not -path "./.git/*" | while read file; do
+            sed -i \
+              -e "s|href=\"index\.html|href=\"$BASE/index.html|g" \
+              -e "s|href=\"trang-chu\.html|href=\"$BASE/trang-chu.html|g" \
+              -e "s|href=\"kham-pha-dia-diem\.html|href=\"$BASE/kham-pha-dia-diem.html|g" \
+              -e "s|href=\"place\.html|href=\"$BASE/place.html|g" \
+              -e "s|href=\"admin/|href=\"$BASE/admin/|g" \
+              "$file"
+          done
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
