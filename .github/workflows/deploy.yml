@@ -26,42 +26,76 @@ jobs:
         # Tên repo trên GitHub — đổi nếu đổi tên repo
         run: echo "BASE=/digital-map-binh-dinh" >> $GITHUB_ENV
 
-      - name: Rewrite asset paths in HTML files
+      - name: Rewrite root-absolute paths for GitHub Pages
         run: |
-          # Thay thế href="assets/ và src="assets/ thành href="/BASE/assets/
-          # Áp dụng cho tất cả file .html trong mọi thư mục
-          find . -name "*.html" -not -path "./.git/*" | while read file; do
-            sed -i \
-              -e "s|href=\"assets/|href=\"$BASE/assets/|g" \
-              -e "s|src=\"assets/|src=\"$BASE/assets/|g" \
-              -e "s|href='assets/|href='$BASE/assets/|g" \
-              -e "s|src='assets/|src='$BASE/assets/|g" \
-              "$file"
-          done
+          python3 << 'PY'
+          from pathlib import Path
+          import os
 
-      - name: Rewrite data/ and uploads/ paths in HTML and JS files
-        run: |
-          find . \( -name "*.html" -o -name "*.js" \) -not -path "./.git/*" | while read file; do
-            sed -i \
-              -e "s|href=\"data/|href=\"$BASE/data/|g" \
-              -e "s|src=\"data/|src=\"$BASE/data/|g" \
-              -e "s|['\"]data/|\"$BASE/data/|g" \
-              -e "s|['\"]uploads/|\"$BASE/uploads/|g" \
-              "$file"
-          done
+          base = os.environ["BASE"].rstrip("/")
 
-      - name: Rewrite internal page links in HTML files
-        run: |
-          # Các link nội bộ như href="trang-chu.html", href="admin/"
-          find . -name "*.html" -not -path "./.git/*" | while read file; do
-            sed -i \
-              -e "s|href=\"index\.html|href=\"$BASE/index.html|g" \
-              -e "s|href=\"trang-chu\.html|href=\"$BASE/trang-chu.html|g" \
-              -e "s|href=\"kham-pha-dia-diem\.html|href=\"$BASE/kham-pha-dia-diem.html|g" \
-              -e "s|href=\"place\.html|href=\"$BASE/place.html|g" \
-              -e "s|href=\"admin/|href=\"$BASE/admin/|g" \
-              "$file"
-          done
+          # Không đụng /api/ — các gọi đó do JS xử lý nội bộ
+          abs_roots = (
+              "/assets/",
+              "/data/",
+              "/uploads/",
+              "/admin",
+              "/place.html",
+              "/trang-chu.html",
+              "/kham-pha-dia-diem.html",
+              "/index.html",
+          )
+          rel_prefixes = (
+              "assets/",
+              "data/",
+              "uploads/",
+              "admin/",
+              "place.html",
+              "trang-chu.html",
+              "kham-pha-dia-diem.html",
+              "index.html",
+          )
+          skip_dirs = {".git", ".github", "node_modules"}
+          exts = {".html", ".js", ".json", ".css"}
+
+          def rewrite_absolute(text: str) -> str:
+              for quote in ('"', "'", "`"):
+                  for root in abs_roots:
+                      text = text.replace(f"{quote}{root}", f"{quote}{base}{root}")
+              text = text.replace('href="/"', f'href="{base}/"')
+              text = text.replace("href='/'", f"href='{base}/'")
+              text = text.replace('href="/#', f'href="{base}/#')
+              text = text.replace("href='/#", f"href='{base}/#")
+              return text
+
+          def rewrite_relative_html(text: str) -> str:
+              for attr in ("href", "src"):
+                  for quote in ('"', "'"):
+                      for prefix in rel_prefixes:
+                          text = text.replace(
+                              f"{attr}={quote}{prefix}",
+                              f"{attr}={quote}{base}/{prefix}",
+                          )
+              return text
+
+          changed = []
+          for path in Path(".").rglob("*"):
+              if not path.is_file() or path.suffix.lower() not in exts:
+                  continue
+              if any(part in skip_dirs for part in path.parts):
+                  continue
+              original = path.read_text(encoding="utf-8")
+              updated = rewrite_absolute(original)
+              if path.suffix.lower() == ".html":
+                  updated = rewrite_relative_html(updated)
+              if updated != original:
+                  path.write_text(updated, encoding="utf-8")
+                  changed.append(str(path).replace("\\", "/"))
+
+          print(f"rewrote {len(changed)} files")
+          for name in changed:
+              print(f"  {name}")
+          PY
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

@@ -1,4 +1,4 @@
-const SITE_DB_NAME = "binh-dinh-tourism-netlify-demo-v16";
+const SITE_DB_NAME = "binh-dinh-tourism-netlify-demo-v17";
 const SITE_DB_VERSION = 1;
 const SITE_SESSION_KEY = "bd_tourism_demo_admin";
 const SEED_URL = "/data/site-data.json";
