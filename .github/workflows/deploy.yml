@@ -66,6 +66,8 @@ jobs:
               text = text.replace("href='/'", f"href='{base}/'")
               text = text.replace('href="/#', f'href="{base}/#')
               text = text.replace("href='/#", f"href='{base}/#")
+              for quote in ('"', "'", "`"):
+                  text = text.replace(f"{quote}/?", f"{quote}{base}/?")
               return text
 
           def rewrite_relative_html(text: str) -> str:
