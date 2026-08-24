@@ -1,12 +1,14 @@
 <!doctype html>
 <html lang="vi">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="copyright" content="VNPT Gia Lai" />
   <meta name="theme-color" content="#0068B5" />
   <title>Bản đồ số du lịch Phường Bình Định | VNPT Gia Lai</title>
-  <meta name="description" content="Bản đồ số du lịch Phường Bình Định; dữ liệu điểm đến, ẩm thực, lưu trú, giải trí, sức khỏe, tiện ích và dẫn đường." />
+  <meta name="description"
+    content="Bản đồ số du lịch Phường Bình Định; dữ liệu điểm đến, ẩm thực, lưu trú, giải trí, sức khỏe, tiện ích và dẫn đường." />
   <link rel="preconnect" href="https://tile.openstreetmap.org" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -14,64 +16,125 @@
   <link rel="stylesheet" href="assets/css/base.css?v=vnpt-16" />
   <link rel="stylesheet" href="assets/css/map.css?v=vnpt-16" />
 </head>
+
 <body>
   <header class="site-header">
     <a class="brand" href="/" aria-label="Bản đồ số du lịch Phường Bình Định">
-      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 37c8-2 12-8 16-16 3 8 8 14 16 16" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M13 23c4-6 8-10 11-12 4 3 8 7 11 12" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><circle cx="24" cy="11" r="3.2" fill="currentColor"/></svg></span>
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48">
+          <path d="M8 37c8-2 12-8 16-16 3 8 8 14 16 16" fill="none" stroke="currentColor" stroke-width="3.4"
+            stroke-linecap="round" />
+          <path d="M13 23c4-6 8-10 11-12 4 3 8 7 11 12" fill="none" stroke="currentColor" stroke-width="3.4"
+            stroke-linecap="round" />
+          <circle cx="24" cy="11" r="3.2" fill="currentColor" />
+        </svg></span>
       <span class="brand-copy"><strong>BÌNH ĐỊNH</strong><small>BẢN ĐỒ DU LỊCH SỐ</small></span>
     </a>
-    <nav class="main-nav" aria-label="Điều hướng chính"><a href="trang-chu.html">Trang chủ</a><a class="active" href="#mapSection">Bản đồ du lịch</a><a href="kham-pha-dia-diem.html">Khám phá địa điểm</a><a class="nav-admin" href="admin/">Quản trị</a></nav>
-    <div class="header-actions"><button class="location-pill" id="resetViewButton" type="button"><span class="pulse-dot"></span>Phường Bình Định</button><a class="admin-link" href="admin/">Quản trị</a><button class="menu-button" id="menuButton" type="button" aria-label="Mở menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+    <nav class="main-nav" aria-label="Điều hướng chính">
+      <span class="nav-auth nav-user" data-user-greeting></span>
+      <a href="trang-chu.html">Trang chủ</a>
+      <a class="active" href="#mapSection">Bản đồ du lịch</a>
+      <a href="kham-pha-dia-diem.html">Khám phá địa điểm</a>
+      <a class="nav-auth nav-guest" href="dang-nhap.html">Đăng nhập</a>
+      <a class="nav-auth nav-guest" href="dang-ky.html">Đăng ký</a>
+      <a class="nav-auth nav-user" data-logout href="#">Đăng xuất</a>
+      <a class="nav-admin" href="admin/">Quản trị</a>
+      </nav>
+    <div class="header-actions">
+      <button class="location-pill" id="resetViewButton" type="button">
+        <span class="pulse-dot"></span>Phường Bình Định
+      </button>
+      <a class="admin-link nav-guest" href="dang-nhap.html">Đăng nhập</a>
+      <a class="admin-link auth-register nav-guest" href="dang-ky.html">Đăng ký</a>
+      <span class="admin-link nav-user" data-user-greeting></span>
+      <a class="admin-link nav-user" data-logout href="#">Đăng xuất</a>
+      <a class="admin-link" href="admin/">Quản trị</a>
+        <button class="menu-button" id="menuButton" type="button" aria-label="Mở menu"
+        aria-expanded="false"><span></span><span></span><span></span></button></div>
   </header>
 
   <main id="mapSection" class="map-page">
     <section class="map-shell" aria-label="Bản đồ số du lịch Phường Bình Định">
       <div id="map" class="map-canvas" aria-label="Bản đồ du lịch Phường Bình Định"></div>
 
-      <div class="top-search-card"><span class="search-icon" aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Tìm điểm đến trong Phường Bình Định..." autocomplete="off" /><button id="clearSearchButton" class="clear-search" type="button" aria-label="Xóa tìm kiếm">×</button></div>
+      <div class="top-search-card"><span class="search-icon" aria-hidden="true">⌕</span><input id="searchInput"
+          type="search" placeholder="Tìm điểm đến trong Phường Bình Định..." autocomplete="off" /><button
+          id="clearSearchButton" class="clear-search" type="button" aria-label="Xóa tìm kiếm">×</button></div>
 
       <aside class="map-panel" id="mapPanel" aria-label="Danh sách địa điểm">
-        <button class="panel-drag" id="panelDrag" type="button" aria-label="Kéo để thu gọn hoặc mở rộng danh sách"><span></span></button>
-        <button class="panel-close-button" id="mapPanelCloseButton" type="button" aria-label="Ẩn danh sách địa điểm">×</button>
+        <button class="panel-drag" id="panelDrag" type="button"
+          aria-label="Kéo để thu gọn hoặc mở rộng danh sách"><span></span></button>
+        <button class="panel-close-button" id="mapPanelCloseButton" type="button"
+          aria-label="Ẩn danh sách địa điểm">×</button>
         <div class="panel-content" id="panelContent">
-        <div class="eyebrow">Bản đồ số du lịch Phường Bình Định</div>
-        <div class="panel-heading-row"><div><h1 id="categoryTitle">Khu/điểm du lịch</h1><p id="categoryDescription">Khám phá điểm đến, dịch vụ và tiện ích trong phạm vi Phường Bình Định.</p></div><span id="resultCount" class="result-count">0</span></div>
-        <div class="category-grid" id="categoryGrid">
-          <button class="category-card active" data-category="dulich" type="button"><span class="category-icon">⌖</span><span>Khu/điểm<br/>du lịch</span></button>
-          <button class="category-card" data-category="luutru" type="button"><span class="category-icon">▣</span><span>Lưu trú<br/>du lịch</span></button>
-          <button class="category-card" data-category="amthuc" type="button"><span class="category-icon">♨</span><span>Ẩm thực</span></button>
-          <button class="category-card" data-category="giaitri" type="button"><span class="category-icon">✦</span><span>Giải trí</span></button>
-          <button class="category-card" data-category="suckhoe" type="button"><span class="category-icon">✚</span><span>Chăm sóc<br/>sức khỏe</span></button>
-          <button class="category-card" data-category="tienich" type="button"><span class="category-icon">◎</span><span>Tiện ích</span></button>
-        </div>
-        <div class="panel-actions"><button class="outline-button" id="showAllButton" type="button">Tất cả địa điểm</button><button class="outline-button" id="refreshCategoryButton" type="button">Làm mới</button></div>
-        <div class="data-state" id="dataState"><span class="mini-spinner"></span><span>Sẵn sàng</span></div>
-        <div class="result-list" id="resultList" aria-live="polite"></div>
+          <div class="eyebrow">Bản đồ số du lịch Phường Bình Định</div>
+          <div class="panel-heading-row">
+            <div>
+              <h1 id="categoryTitle">Khu/điểm du lịch</h1>
+              <p id="categoryDescription">Khám phá điểm đến, dịch vụ và tiện ích trong phạm vi Phường Bình Định.</p>
+            </div><span id="resultCount" class="result-count">0</span>
+          </div>
+          <div class="category-grid" id="categoryGrid">
+            <button class="category-card active" data-category="dulich" type="button"><span
+                class="category-icon">⌖</span><span>Khu/điểm<br />du lịch</span></button>
+            <button class="category-card" data-category="luutru" type="button"><span
+                class="category-icon">▣</span><span>Lưu trú<br />du lịch</span></button>
+            <button class="category-card" data-category="amthuc" type="button"><span
+                class="category-icon">♨</span><span>Ẩm thực</span></button>
+            <button class="category-card" data-category="giaitri" type="button"><span
+                class="category-icon">✦</span><span>Giải trí</span></button>
+            <button class="category-card" data-category="suckhoe" type="button"><span
+                class="category-icon">✚</span><span>Chăm sóc<br />sức khỏe</span></button>
+            <button class="category-card" data-category="tienich" type="button"><span
+                class="category-icon">◎</span><span>Tiện ích</span></button>
+          </div>
+          <div class="panel-actions"><button class="outline-button" id="showAllButton" type="button">Tất cả địa
+              điểm</button><button class="outline-button" id="refreshCategoryButton" type="button">Làm mới</button>
+          </div>
+          <div class="data-state" id="dataState"><span class="mini-spinner"></span><span>Sẵn sàng</span></div>
+          <div class="result-list" id="resultList" aria-live="polite"></div>
         </div>
       </aside>
-      <button class="map-panel-open-button" id="mapPanelOpenButton" type="button" hidden aria-label="Mở danh sách địa điểm"> Địa điểm</button>
+      <button class="map-panel-open-button" id="mapPanelOpenButton" type="button" hidden
+        aria-label="Mở danh sách địa điểm"> Địa điểm</button>
 
-      <div class="map-controls" aria-label="Điều khiển bản đồ"><button id="zoomInButton" type="button" title="Phóng to">+</button><button id="zoomOutButton" type="button" title="Thu nhỏ">−</button><button id="locateButton" type="button" title="Vị trí của tôi">◎</button></div>
+      <div class="map-controls" aria-label="Điều khiển bản đồ"><button id="zoomInButton" type="button"
+          title="Phóng to">+</button><button id="zoomOutButton" type="button" title="Thu nhỏ">−</button><button
+          id="locateButton" type="button" title="Vị trí của tôi">◎</button></div>
 
       <article id="placePreview" class="place-preview" hidden>
         <button id="closePlacePreview" class="preview-close" type="button" aria-label="Đóng">×</button>
         <div id="previewImageWrap" class="preview-image-wrap"><img id="previewImage" alt="" /></div>
-        <div class="preview-copy"><span id="previewCategory" class="preview-category"></span><h2 id="previewName"></h2><p id="previewAddress"></p><p id="previewDescription" class="preview-description"></p><div id="previewFacts" class="preview-facts"></div><div class="preview-actions route-enabled"><a id="previewDetailLink" class="preview-primary" href="#">Xem chi tiết</a><button id="previewRouteButton" class="preview-route" type="button">Dẫn đường</button><button id="previewPanoramaButton" class="preview-secondary" type="button">Tour 360°</button></div></div>
+        <div class="preview-copy"><span id="previewCategory" class="preview-category"></span>
+          <h2 id="previewName"></h2>
+          <p id="previewAddress"></p>
+          <p id="previewDescription" class="preview-description"></p>
+          <div id="previewFacts" class="preview-facts"></div>
+          <div class="preview-actions route-enabled"><a id="previewDetailLink" class="preview-primary" href="#">Xem chi
+              tiết</a><button id="previewRouteButton" class="preview-route" type="button">Dẫn đường</button><button
+              id="previewPanoramaButton" class="preview-secondary" type="button">Tour 360°</button></div>
+        </div>
       </article>
 
       <article id="routeSummary" class="route-summary" hidden>
-        <button id="routeSummaryDrag" class="route-summary-drag" type="button" aria-label="Thu nhỏ bảng dẫn đường"><span></span></button>
-        <button id="closeRouteSummary" class="preview-close route-summary-close" type="button" aria-label="Đóng tuyến đường">×</button>
+        <button id="routeSummaryDrag" class="route-summary-drag" type="button"
+          aria-label="Thu nhỏ bảng dẫn đường"><span></span></button>
+        <button id="closeRouteSummary" class="preview-close route-summary-close" type="button"
+          aria-label="Đóng tuyến đường">×</button>
         <span class="eyebrow">Dẫn đường</span>
         <h2 id="routeSummaryTitle">Tuyến đường</h2>
         <p id="routeSummaryOrigin" class="route-summary-origin"></p>
-        <div class="route-metrics"><div><strong id="routeDistance">—</strong><span>Quãng đường</span></div><div><strong id="routeDuration">—</strong><span>Thời gian dự kiến</span></div></div>
+        <div class="route-metrics">
+          <div><strong id="routeDistance">—</strong><span>Quãng đường</span></div>
+          <div><strong id="routeDuration">—</strong><span>Thời gian dự kiến</span></div>
+        </div>
         <div id="routeNavigationStatus" class="route-navigation-status" hidden></div>
-        <div class="route-summary-actions"><button id="toggleRouteSteps" type="button">Xem từng chặng</button><button id="startNavigationButton" class="route-follow-button" type="button">Theo dõi vị trí</button></div>
+        <div class="route-summary-actions"><button id="toggleRouteSteps" type="button">Xem từng chặng</button><button
+            id="startNavigationButton" class="route-follow-button" type="button">Theo dõi vị trí</button></div>
         <ol id="routeSteps" class="route-steps" hidden></ol>
       </article>
 
-      <div class="boundary-status" id="boundaryStatus"><span class="status-dot"></span><span id="boundaryStatusText">Đang tải ranh giới Phường Bình Định...</span></div>
+      <div class="boundary-status" id="boundaryStatus"><span class="status-dot"></span><span
+          id="boundaryStatusText">Đang tải ranh giới Phường Bình Định...</span></div>
       <button class="region-data-button" id="regionDataButton" type="button" hidden>Hiển thị dữ liệu vùng này</button>
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
     </section>
@@ -80,45 +143,70 @@
   <dialog id="journeyDialog" class="journey-dialog">
     <div class="journey-dialog-shell">
       <header>
-        <div><span class="eyebrow">Bắt đầu hành trình</span><h2>Bạn muốn đi đâu?</h2></div>
+        <div><span class="eyebrow">Bắt đầu hành trình</span>
+          <h2>Bạn muốn đi đâu?</h2>
+        </div>
         <button id="closeJourneyDialog" class="preview-close" type="button" aria-label="Đóng">×</button>
       </header>
       <div class="journey-location-card">
         <span class="journey-location-icon">◎</span>
-        <div><strong id="journeyLocationTitle">Đang xác định vị trí của bạn...</strong><small id="journeyLocationText">Cho phép truy cập vị trí để gợi ý hành trình phù hợp.</small></div>
+        <div><strong id="journeyLocationTitle">Đang xác định vị trí của bạn...</strong><small
+            id="journeyLocationText">Cho phép truy cập vị trí để gợi ý hành trình phù hợp.</small></div>
       </div>
       <div class="journey-field">
         <label for="journeyOriginInput">Bạn muốn đi từ đâu?</label>
-        <button id="journeyUseCurrentButton" class="journey-current-button" type="button"><span>◎</span><span><strong>Dùng vị trí hiện tại</strong><small id="journeyCurrentLabel">Đang chờ vị trí...</small></span></button>
-        <div class="journey-input-row"><input id="journeyOriginInput" type="search" placeholder="Nhập địa chỉ hoặc địa điểm xuất phát..." autocomplete="off" /><button id="journeySearchOriginButton" type="button">Tìm</button></div>
+        <button id="journeyUseCurrentButton" class="journey-current-button"
+          type="button"><span>◎</span><span><strong>Dùng vị trí hiện tại</strong><small id="journeyCurrentLabel">Đang
+              chờ vị trí...</small></span></button>
+        <div class="journey-input-row"><input id="journeyOriginInput" type="search"
+            placeholder="Nhập địa chỉ hoặc địa điểm xuất phát..." autocomplete="off" /><button
+            id="journeySearchOriginButton" type="button">Tìm</button></div>
         <div id="journeyOriginResults" class="journey-results"></div>
       </div>
       <div class="journey-field">
         <label for="journeyDestinationInput">Bạn muốn đến địa điểm nào?</label>
-        <input id="journeyDestinationInput" type="search" placeholder="Ví dụ: Chùa Thiên An, Ozone Coffee..." autocomplete="off" />
+        <input id="journeyDestinationInput" type="search" placeholder="Ví dụ: Chùa Thiên An, Ozone Coffee..."
+          autocomplete="off" />
         <div id="journeyDestinationResults" class="journey-results"></div>
       </div>
       <div id="journeyStatus" class="journey-status" aria-live="polite"></div>
-      <div class="journey-actions"><button id="journeyExploreButton" class="outline-button" type="button">Khám phá Phường Bình Định</button><button id="journeyStartButton" class="journey-start-button" type="button" disabled>Dẫn đường</button></div>
+      <div class="journey-actions"><button id="journeyExploreButton" class="outline-button" type="button">Khám phá
+          Phường Bình Định</button><button id="journeyStartButton" class="journey-start-button" type="button"
+          disabled>Dẫn đường</button></div>
     </div>
   </dialog>
 
   <dialog id="routeDialog" class="route-dialog" aria-modal="false">
     <div class="route-dialog-shell">
       <div id="routeDialogDrag" class="route-dialog-drag"><span></span></div>
-      <header><div><span class="eyebrow">Chọn điểm xuất phát</span><h2>Dẫn đường đến <span id="routeDestinationName">địa điểm</span></h2></div><button id="closeRouteDialog" class="preview-close" type="button" aria-label="Đóng">×</button></header>
+      <header>
+        <div><span class="eyebrow">Chọn điểm xuất phát</span>
+          <h2>Dẫn đường đến <span id="routeDestinationName">địa điểm</span></h2>
+        </div><button id="closeRouteDialog" class="preview-close" type="button" aria-label="Đóng">×</button>
+      </header>
       <p class="route-help">Bạn có thể đi từ vị trí hiện tại hoặc nhập một điểm xuất phát bất kỳ tại Việt Nam.</p>
-      <button id="useCurrentLocationButton" class="route-current-button" type="button"><span>◎</span><span><strong>Vị trí hiện tại</strong><small>Sử dụng vị trí của thiết bị</small></span></button>
+      <button id="useCurrentLocationButton" class="route-current-button" type="button"><span>◎</span><span><strong>Vị
+            trí hiện tại</strong><small>Sử dụng vị trí của thiết bị</small></span></button>
       <div class="route-divider"><span>hoặc nhập điểm xuất phát</span></div>
       <label class="route-origin-label" for="routeOriginInput">Bạn muốn đi từ đâu?</label>
-      <div class="route-origin-search"><input id="routeOriginInput" type="search" placeholder="Nhập địa chỉ hoặc địa điểm xuất phát..." autocomplete="off" /><button id="searchRouteOriginButton" type="button">Tìm</button></div>
+      <div class="route-origin-search"><input id="routeOriginInput" type="search"
+          placeholder="Nhập địa chỉ hoặc địa điểm xuất phát..." autocomplete="off" /><button
+          id="searchRouteOriginButton" type="button">Tìm</button></div>
       <div id="routeOriginResults" class="route-origin-results"></div>
       <div id="routeDialogStatus" class="route-dialog-status" aria-live="polite"></div>
     </div>
   </dialog>
 
   <dialog id="panoramaDialog" class="streetview-dialog">
-    <div class="streetview-shell"><header><div><span class="eyebrow">Không gian 360°</span><h2 id="panoramaTitle">Tour 360°</h2></div><button id="closePanoramaButton" class="preview-close" type="button" aria-label="Đóng">×</button></header><div id="panoramaStatus" class="streetview-status">Đang tải không gian 360°...</div><div id="panoramaCanvas" class="streetview-canvas"></div></div>
+    <div class="streetview-shell">
+      <header>
+        <div><span class="eyebrow">Không gian 360°</span>
+          <h2 id="panoramaTitle">Tour 360°</h2>
+        </div><button id="closePanoramaButton" class="preview-close" type="button" aria-label="Đóng">×</button>
+      </header>
+      <div id="panoramaStatus" class="streetview-status">Đang tải không gian 360°...</div>
+      <div id="panoramaCanvas" class="streetview-canvas"></div>
+    </div>
   </dialog>
 
   <footer class="site-footer">
@@ -126,21 +214,33 @@
     <div class="footer-col">
       <div class="footer-brand-logo">
         <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="18" cy="18" r="18" fill="#0068B5"/>
-          <path d="M18 8C13.03 8 9 12.03 9 17c0 6.38 9 19 9 19s9-12.62 9-19c0-4.97-4.03-9-9-9zm0 12.5A3.5 3.5 0 1 1 18 13.5a3.5 3.5 0 0 1 0 7z" fill="#fff"/>
+          <circle cx="18" cy="18" r="18" fill="#0068B5" />
+          <path
+            d="M18 8C13.03 8 9 12.03 9 17c0 6.38 9 19 9 19s9-12.62 9-19c0-4.97-4.03-9-9-9zm0 12.5A3.5 3.5 0 1 1 18 13.5a3.5 3.5 0 0 1 0 7z"
+            fill="#fff" />
         </svg>
         Bản đồ số Bình Định
       </div>
-      <p class="footer-brand-desc">Khám phá điểm đến, dịch vụ và tiện ích trên địa bàn Phường Bình Định, thị xã An Nhơn, tỉnh Bình Định.</p>
+      <p class="footer-brand-desc">Khám phá điểm đến, dịch vụ và tiện ích trên địa bàn Phường Bình Định, thị xã An Nhơn,
+        tỉnh Bình Định.</p>
       <div class="footer-social" aria-label="Mạng xã hội">
         <a href="#" aria-label="Facebook">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+          </svg>
         </a>
         <a href="#" aria-label="YouTube">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z" />
+          </svg>
         </a>
         <a href="#" aria-label="Zalo">
-          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#9DBFD6"/><text x="12" y="16.2" text-anchor="middle" font-size="7.2" font-weight="800" font-family="Arial,Helvetica,sans-serif" fill="#0068B5" textLength="18" lengthAdjust="spacingAndGlyphs">Zalo</text></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+            <rect width="24" height="24" rx="6" fill="#9DBFD6" /><text x="12" y="16.2" text-anchor="middle"
+              font-size="7.2" font-weight="800" font-family="Arial,Helvetica,sans-serif" fill="#0068B5" textLength="18"
+              lengthAdjust="spacingAndGlyphs">Zalo</text>
+          </svg>
         </a>
       </div>
     </div>
@@ -174,19 +274,31 @@
       <h4>Liên hệ</h4>
       <ul class="footer-contact-list">
         <li>
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
           Phường Bình Định, thị xã An Nhơn, tỉnh Bình Định
         </li>
         <li>
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.89a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16.92z"/></svg>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.89a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16.92z" />
+          </svg>
           1800 1260 (miễn phí)
         </li>
         <li>
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
           vnpt.gialai@vnpt.vn
         </li>
         <li>
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
           Thứ 2 – Thứ 6: 7:30 – 17:00
         </li>
       </ul>
@@ -202,5 +314,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.7/build/pannellum.js"></script>
   <script type="module" src="assets/js/map/map-app.js?v=vnpt-16"></script>
+  <script type="module" src="assets/js/utils.js?v=vnpt-16"></script>
 </body>
+
 </html>

@@ -43,6 +43,8 @@ jobs:
               "/place.html",
               "/trang-chu.html",
               "/kham-pha-dia-diem.html",
+              "/dang-nhap.html",
+              "/dang-ky.html",
               "/index.html",
           )
           rel_prefixes = (
@@ -53,6 +55,8 @@ jobs:
               "place.html",
               "trang-chu.html",
               "kham-pha-dia-diem.html",
+              "dang-nhap.html",
+              "dang-ky.html",
               "index.html",
           )
           skip_dirs = {".git", ".github", "node_modules"}

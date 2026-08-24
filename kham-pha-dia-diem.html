@@ -21,13 +21,21 @@
     </a>
 
     <nav class="main-nav" aria-label="Điều hướng chính">
+      <span class="nav-auth nav-user" data-user-greeting></span>
       <a href="trang-chu.html">Trang chủ</a>
       <a href="index.html">Bản đồ du lịch</a>
       <a class="active" href="kham-pha-dia-diem.html">Khám phá địa điểm</a>
+      <a class="nav-auth nav-guest" href="dang-nhap.html">Đăng nhập</a>
+      <a class="nav-auth nav-guest" href="dang-ky.html">Đăng ký</a>
+      <a class="nav-auth nav-user" data-logout href="#">Đăng xuất</a>
       <a class="nav-admin" href="admin/">Quản trị</a>
     </nav>
 
     <div class="header-actions">
+      <a class="admin-link nav-guest" href="dang-nhap.html">Đăng nhập</a>
+      <a class="admin-link auth-register nav-guest" href="dang-ky.html">Đăng ký</a>
+      <span class="admin-link nav-user" data-user-greeting></span>
+      <a class="admin-link nav-user" data-logout href="#">Đăng xuất</a>
       <a class="admin-link" href="admin/">Quản trị</a>
       <button class="menu-button" id="menuButton" type="button" aria-label="Mở menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -164,5 +172,6 @@
   </footer>
 
   <script type="module" src="assets/js/explore.js?v=vnpt-16"></script>
+  <script type="module" src="assets/js/utils.js?v=vnpt-16"></script>
 </body>
 </html>
